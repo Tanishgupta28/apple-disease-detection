@@ -12,6 +12,8 @@ from src.utils import ROOT, load_config, save_json
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
 def main():
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--check-only',action='store_true');args=parser.parse_args()
     config=load_config();checks={}
     originals=json.loads((ROOT/'docs/original_manifest.json').read_text())
     for record in originals:
@@ -66,7 +68,7 @@ def main():
     checks['credential_pattern_scan']={'commits_checked':len(commits),'unique_blobs_checked':len(checked),'suspect_paths':suspects,
         'scope':'Known token/private-key patterns; not a proof that every possible secret format is absent.'}
     checks['git_remote']=subprocess.check_output(['git','remote','get-url','origin'],cwd=ROOT,text=True).strip()
-    save_json(ROOT/'results/final_audit.json',checks)
+    if not args.check_only:save_json(ROOT/'results/final_audit.json',checks)
     print(json.dumps(checks,indent=2))
 
 if __name__=='__main__':main()
