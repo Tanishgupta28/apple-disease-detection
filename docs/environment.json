@@ -1,0 +1,15 @@
+{
+  "checked_utc": "2026-10-05T01:22:39.956078+00:00",
+  "project_root": "/workspace/Project",
+  "python": "3.10.12",
+  "framework": "PyTorch",
+  "framework_version": "2.4.0a0+f70bd71a48.nv24.06",
+  "cuda_available": true,
+  "cuda_runtime": "12.5",
+  "gpu_models": [
+    "NVIDIA H100 80GB HBM3 MIG 3g.40gb"
+  ],
+  "gpu_memory_bytes": [
+    42278584320
+  ]
+}

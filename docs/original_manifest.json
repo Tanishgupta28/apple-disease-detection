@@ -1,0 +1,56 @@
+[
+  {
+    "path": "original_work/Apple disease detection codes/apple-disease-dectection-cnn (1).ipynb",
+    "bytes": 45509,
+    "sha256": "0048ea1e76539d67850cc614f60bff00cfc21c2d704193de2a52664723123a03",
+    "valid_notebook": true
+  },
+  {
+    "path": "original_work/Apple disease detection codes/apple-disease-detection-convnext-insp-transform.ipynb",
+    "bytes": 57027,
+    "sha256": "54d3a5bba457bdc6f440e7cd5c4908592a5ecbcbcadd3cc6ff9b4c9d065a7792",
+    "valid_notebook": true
+  },
+  {
+    "path": "original_work/Apple disease detection codes/apple-disease-detection-densenet121-finetuned.ipynb",
+    "bytes": 53670,
+    "sha256": "26c177fca79b1d7dfd3650b295a8ff654afc4e69c869d8b08c5b5786c3b9492f",
+    "valid_notebook": true
+  },
+  {
+    "path": "original_work/Apple disease detection codes/apple-disease-detection-efficientnetb3-finetuned.ipynb",
+    "bytes": 54622,
+    "sha256": "63c7c186a274071f48c58721bcbb1068a806ec1008c5217ac1a41caa8b6d0f22",
+    "valid_notebook": true
+  },
+  {
+    "path": "original_work/Apple disease detection codes/apple-disease-detection-inceptionv3-finetuned.ipynb",
+    "bytes": 52866,
+    "sha256": "ede215a8a8ec63b5f566f7d28f72ebcbf0ab96d3d36daf3a2071836bdf10bc10",
+    "valid_notebook": true
+  },
+  {
+    "path": "original_work/Apple disease detection codes/apple-disease-detection-mobilenetv2-finetuned.ipynb",
+    "bytes": 54918,
+    "sha256": "355a2860951be6e430be968311b3b5a79cb88aaacecc0e5b583f11e204ce2da4",
+    "valid_notebook": true
+  },
+  {
+    "path": "original_work/Apple disease detection codes/apple-disease-detection-resnet50-finetuned (1).ipynb",
+    "bytes": 53441,
+    "sha256": "e895cbc5f41523725707619da28aae2599f1f980eeedaa1c5af3bce971570883",
+    "valid_notebook": true
+  },
+  {
+    "path": "original_work/Apple disease detection codes/apple-disease-detection-xception-finetuned.ipynb",
+    "bytes": 57301,
+    "sha256": "1cf66ee603100ab3736e4a0c12be16cb25b04e16f82428b55019eba1c036c288",
+    "valid_notebook": true
+  },
+  {
+    "path": "original_work/Apple disease detection codes/ensemble-apple-disease-detection.ipynb",
+    "bytes": 63093,
+    "sha256": "ec620ea0ee2e9df32920578dd13c15fb286a832ec35231725e5fe4c96ab5c38b",
+    "valid_notebook": true
+  }
+]
