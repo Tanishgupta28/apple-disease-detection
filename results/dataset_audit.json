@@ -1,0 +1,104 @@
+{
+  "source": "https://github.com/JasonYangCode/AppleLeaf9",
+  "license": "CC BY 4.0",
+  "citation": "Yang, Q.; Duan, S.; Wang, L. (2022). Efficient Identification of Apple Leaf Diseases in the Wild Using Convolutional Neural Networks. Agronomy 12(11), 2784. https://doi.org/10.3390/agronomy12112784",
+  "archive_sha256": "a8b79a8725ece5f023b45c2740df4c3585da1bdb95df346c2020ea0d1aa50365",
+  "source_class_counts": {
+    "Scab": 5410,
+    "Rust": 2753,
+    "Frogeye leaf spot": 3181,
+    "Powdery mildew": 1184,
+    "Alternaria leaf spot": 417,
+    "Health": 516,
+    "Brown spot": 411,
+    "Grey spot": 339,
+    "Mosaic": 371
+  },
+  "source_total": 14582,
+  "selected_before_audit": 13461,
+  "classes": [
+    "Apple Scab",
+    "Rust",
+    "Frogeye Leaf Spot",
+    "Powdery Mildew",
+    "Alternaria Leaf Spot",
+    "Healthy"
+  ],
+  "excluded_classes": [
+    "Brown spot",
+    "Grey spot",
+    "Mosaic"
+  ],
+  "corrupt_images": [],
+  "exact_or_decoded_duplicates_removed": 0,
+  "exact_label_conflicts_removed": 0,
+  "near_duplicate_label_conflicts_removed": 56,
+  "images_used": 13405,
+  "groups_used": 12812,
+  "perceptual_hamming_threshold": 4,
+  "grouping": "Connected components of pHash matches across rotations/reflections; no group spans splits.",
+  "seed": 42,
+  "class_counts": {
+    "Apple Scab": 5382,
+    "Rust": 2725,
+    "Frogeye Leaf Spot": 3181,
+    "Powdery Mildew": 1184,
+    "Alternaria Leaf Spot": 417,
+    "Healthy": 516
+  },
+  "split_counts": {
+    "train": 9378,
+    "validation": 2014,
+    "test": 2013
+  },
+  "split_class_counts": {
+    "train": {
+      "Apple Scab": 3766,
+      "Rust": 1907,
+      "Frogeye Leaf Spot": 2226,
+      "Powdery Mildew": 828,
+      "Alternaria Leaf Spot": 291,
+      "Healthy": 360
+    },
+    "validation": {
+      "Apple Scab": 808,
+      "Rust": 409,
+      "Frogeye Leaf Spot": 478,
+      "Powdery Mildew": 178,
+      "Alternaria Leaf Spot": 63,
+      "Healthy": 78
+    },
+    "test": {
+      "Apple Scab": 808,
+      "Rust": 409,
+      "Frogeye Leaf Spot": 477,
+      "Powdery Mildew": 178,
+      "Alternaria Leaf Spot": 63,
+      "Healthy": 78
+    }
+  },
+  "dimension_summary": {
+    "width": {
+      "count": 13405.0,
+      "mean": 1065.069451697128,
+      "std": 394.67026421182806,
+      "min": 183.0,
+      "25%": 958.0,
+      "50%": 958.0,
+      "75%": 958.0,
+      "max": 2048.0
+    },
+    "height": {
+      "count": 13405.0,
+      "mean": 719.9851547929877,
+      "std": 253.1001821055674,
+      "min": 178.0,
+      "25%": 640.0,
+      "50%": 640.0,
+      "75%": 640.0,
+      "max": 2048.0
+    }
+  },
+  "split_manifest_sha256": "7260910dfb0d13be742d223b5ea0dfd28c8998081c778fa80806ae0743013076",
+  "limitations": "Perceptual grouping cannot establish orchard/leaf identities or detect every crop/photographic variant; source provides no acquisition group IDs. No absolute claim of absence of leakage is possible."
+}

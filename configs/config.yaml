@@ -1,0 +1,18 @@
+seed: 42
+classes: [Apple Scab, Rust, Frogeye Leaf Spot, Powdery Mildew, Alternaria Leaf Spot, Healthy]
+raw_dir: data/raw/AppleLeaf9-main
+processed_dir: data/processed
+image_size: 224
+batch_size: 64
+num_workers: 8
+require_cuda: true
+class_weight_ratio_threshold: 2.0
+cnn_epochs: 15
+head_epochs: 8
+finetune_epochs: 12
+head_lr: 0.001
+finetune_lr: 0.00003
+patience: 5
+lr_patience: 2
+min_delta: 0.0005
+low_confidence_threshold: 0.6
