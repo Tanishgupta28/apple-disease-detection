@@ -1,0 +1,20 @@
+{
+  "original_files_preserved_and_valid": 9,
+  "new_notebooks_valid": 4,
+  "known_duplicate_groups_do_not_cross_splits": true,
+  "published_split_matches_training_manifest": true,
+  "selection_and_preprocessing_labels_consistent": true,
+  "validation_selection_matches_recorded_winner": true,
+  "test_metrics_match_saved_predictions": true,
+  "gpu_training_provenance": [
+    "NVIDIA H100 80GB HBM3 MIG 3g.40gb"
+  ],
+  "raw_images_and_checkpoints_excluded_from_git": true,
+  "credential_pattern_scan": {
+    "commits_checked": 6,
+    "unique_blobs_checked": 91,
+    "suspect_paths": [],
+    "scope": "Known token/private-key patterns; not a proof that every possible secret format is absent."
+  },
+  "git_remote": "https://github.com/Tanishgupta28/apple-disease-detection.git"
+}

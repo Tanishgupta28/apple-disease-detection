@@ -1,0 +1,6 @@
+{
+  "command": "python -m pytest",
+  "passed": 14,
+  "dataset_required": false,
+  "pretrained_weight_download_required": false
+}

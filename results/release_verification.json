@@ -1,0 +1,8 @@
+{
+  "release": "v1.0.0",
+  "repository": "https://github.com/Tanishgupta28/apple-disease-detection",
+  "asset": "resnet50_finetuned.pth",
+  "downloaded_size_bytes": 94403358,
+  "sha256": "48fde2b0f9232e7ef39b0c89a8667296c45141bd6512557fe4e2eef1e04eec2c",
+  "checksum_verified": true
+}

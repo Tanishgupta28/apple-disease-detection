@@ -8,5 +8,6 @@
   "input_injection": "File uploader return value patched because AppTest has no native upload setter; inference and Grad-CAM executed normally.",
   "tested_image": "data/raw/AppleLeaf9-main/Scab/Scab (3843).jpg",
   "prediction": "Apple Scab",
-  "confidence": 0.999932050704956
+  "confidence": 0.999932050704956,
+  "http_health_status": 200
 }
