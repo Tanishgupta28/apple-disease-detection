@@ -1,0 +1,48 @@
+{
+  "architecture": "custom_cnn",
+  "experiment": "custom_cnn",
+  "classes": [
+    "Apple Scab",
+    "Rust",
+    "Frogeye Leaf Spot",
+    "Powdery Mildew",
+    "Alternaria Leaf Spot",
+    "Healthy"
+  ],
+  "image_size": 224,
+  "normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "epoch": 15,
+  "validation": {
+    "loss": 0.8185717170797251,
+    "accuracy": 0.7199602780536246,
+    "macro_f1": 0.6591596714523766
+  },
+  "seed": 42,
+  "split_manifest_sha256": "7260910dfb0d13be742d223b5ea0dfd28c8998081c778fa80806ae0743013076",
+  "device": "cuda",
+  "gpu": "NVIDIA H100 80GB HBM3 MIG 3g.40gb",
+  "pretrained_weights": null,
+  "checkpoint": "models/custom_cnn.pth",
+  "best_epoch_training": {
+    "loss": 0.8815590272353488,
+    "accuracy": 0.6266794625719769,
+    "macro_f1": 0.5824183634725955
+  },
+  "epochs_run": 15,
+  "parameter_count": 316198,
+  "checkpoint_size_bytes": 1277666,
+  "training_seconds": null,
+  "checkpoint_sha256": "e61086931b98766e70b854158db52137f4adfda160cdae7b9e9bbf5c9f759055",
+  "recovery_note": "Training completed 15 epochs. NumPy metric scalars were converted to native Python floats for safe weights-only loading; learned weights unchanged. Wall training time was not recovered."
+}

@@ -27,8 +27,8 @@ def run_epoch(model, loader, criterion, device, optimizer=None, architecture='cu
             total_loss+=loss.item()*len(target)
             labels.extend(target.detach().cpu().tolist())
             predictions.extend(logits.argmax(1).detach().cpu().tolist())
-    return {'loss':total_loss/len(labels),'accuracy':accuracy_score(labels,predictions),
-            'macro_f1':f1_score(labels,predictions,labels=list(range(6)),average='macro',zero_division=0)}
+    return {'loss':total_loss/len(labels),'accuracy':float(accuracy_score(labels,predictions)),
+            'macro_f1':float(f1_score(labels,predictions,labels=list(range(6)),average='macro',zero_division=0))}
 
 def train_phase(model,name,phase,config,loaders_by_split,device,weights):
     """Save best validation macro-F1 checkpoint; use loss to break exact ties."""
@@ -109,7 +109,8 @@ def refresh_comparison():
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--model',choices=['all','custom_cnn','mobilenetv2','resnet50'],default='all')
-    parser.add_argument('--config');args=parser.parse_args();config=load_config(args.config)
+    parser.add_argument('--config');parser.add_argument('--resume',action='store_true');args=parser.parse_args();config=load_config(args.config)
+    if (ROOT/'results/metrics.json').exists():raise RuntimeError('This benchmark has already been tested. Preserve its results; use a deliberately separate benchmark for new training.')
     if config['require_cuda'] and not torch.cuda.is_available():raise RuntimeError('CUDA required: no visible GPU. Fix environment before training.')
     device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('GPU:',torch.cuda.get_device_name() if device.type=='cuda' else 'CPU',flush=True)
@@ -117,6 +118,8 @@ def main():
     torch.set_num_threads(8)
     summaries=[]
     for name in ['custom_cnn','mobilenetv2','resnet50'] if args.model=='all' else [args.model]:
+        if args.resume and name=='custom_cnn' and (ROOT/'results/custom_cnn_summary.json').exists():
+            print('Reusing completed custom CNN baseline.',flush=True);refresh_comparison();continue
         seed_everything(config['seed']);data=loaders(config);weights=class_weights(config)
         model=build_model(name).to(device)
         summaries.append(train_phase(model,name,'baseline' if name=='custom_cnn' else 'frozen',config,data,device,weights))

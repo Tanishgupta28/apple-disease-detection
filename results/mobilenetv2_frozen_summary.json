@@ -1,0 +1,47 @@
+{
+  "architecture": "mobilenetv2",
+  "experiment": "mobilenetv2_frozen",
+  "classes": [
+    "Apple Scab",
+    "Rust",
+    "Frogeye Leaf Spot",
+    "Powdery Mildew",
+    "Alternaria Leaf Spot",
+    "Healthy"
+  ],
+  "image_size": 224,
+  "normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "epoch": 8,
+  "validation": {
+    "loss": 0.6056115940405572,
+    "accuracy": 0.782025819265144,
+    "macro_f1": 0.7386820006846944
+  },
+  "seed": 42,
+  "split_manifest_sha256": "7260910dfb0d13be742d223b5ea0dfd28c8998081c778fa80806ae0743013076",
+  "device": "cuda",
+  "gpu": "NVIDIA H100 80GB HBM3 MIG 3g.40gb",
+  "pretrained_weights": "IMAGENET1K_V1",
+  "checkpoint": "models/mobilenetv2_frozen.pth",
+  "best_epoch_training": {
+    "loss": 0.5291756078565927,
+    "accuracy": 0.7852420558754531,
+    "macro_f1": 0.740612387500478
+  },
+  "epochs_run": 8,
+  "parameter_count": 2231558,
+  "checkpoint_size_bytes": 9174824,
+  "training_seconds": 125.15135610598372,
+  "checkpoint_sha256": "cdd167d76c137a264224eae0ec248e3be703aa5310047c979342c627b5a947d1"
+}
