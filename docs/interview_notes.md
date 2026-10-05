@@ -154,7 +154,7 @@ It is a coarse model explanation, not a lesion mask, proof of causality or proof
 
 ## 16. Why the final model was selected
 
-The exact winner is recorded in `results/selection.json`, with its measured validation macro F1 and checkpoint hash. Check `README.md` for the populated results table. The rule was fixed before test evaluation: maximum validation macro F1, ties resolved by lower validation cross entropy. Only the selected checkpoint was tested. Do not claim the model was chosen because its test accuracy was highest.
+The winner is **resnet50_finetuned**, with validation accuracy 96.52% and validation macro F1 0.9593. The final fixed test result is 97.07% accuracy and 0.9627 macro F1. Its checkpoint is 94.40 MB. `results/selection.json` records the validation decision and checkpoint hash. Check `README.md` for the populated results table. The rule was fixed before test evaluation: maximum validation macro F1, ties resolved by lower validation cross entropy. Only the selected checkpoint was tested. Do not claim the model was chosen because its test accuracy was highest.
 
 **Interview Answer**
 

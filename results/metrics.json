@@ -1,0 +1,401 @@
+{
+  "selected_experiment": "resnet50_finetuned",
+  "classes": [
+    "Apple Scab",
+    "Rust",
+    "Frogeye Leaf Spot",
+    "Powdery Mildew",
+    "Alternaria Leaf Spot",
+    "Healthy"
+  ],
+  "selection_rule": "Maximum validation macro F1; ties by lower validation cross entropy.",
+  "selection_checkpoint_sha256": "48fde2b0f9232e7ef39b0c89a8667296c45141bd6512557fe4e2eef1e04eec2c",
+  "test_used_for_model_selection": false,
+  "train_metrics_use_augmentation": false,
+  "train": {
+    "n_images": 9378,
+    "accuracy": 0.9928556195350821,
+    "macro_precision": 0.9879636008335159,
+    "macro_recall": 0.9964478126946988,
+    "macro_f1": 0.9921133657822451,
+    "weighted_f1": 0.9928657973693602,
+    "classwise": {
+      "Apple Scab": {
+        "precision": 0.9975812953507122,
+        "recall": 0.9856611789697292,
+        "f1-score": 0.991585414718846,
+        "support": 3766.0
+      },
+      "Rust": {
+        "precision": 0.9979013641133263,
+        "recall": 0.9973780807551127,
+        "f1-score": 0.997639653815893,
+        "support": 1907.0
+      },
+      "Frogeye Leaf Spot": {
+        "precision": 0.9879786286731967,
+        "recall": 0.9968553459119497,
+        "f1-score": 0.9923971377459749,
+        "support": 2226.0
+      },
+      "Powdery Mildew": {
+        "precision": 0.986873508353222,
+        "recall": 0.998792270531401,
+        "f1-score": 0.992797118847539,
+        "support": 828.0
+      },
+      "Alternaria Leaf Spot": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 291.0
+      },
+      "Healthy": {
+        "precision": 0.9574468085106383,
+        "recall": 1.0,
+        "f1-score": 0.9782608695652174,
+        "support": 360.0
+      },
+      "accuracy": 0.9928556195350821,
+      "macro avg": {
+        "precision": 0.9879636008335159,
+        "recall": 0.9964478126946988,
+        "f1-score": 0.9921133657822451,
+        "support": 9378.0
+      },
+      "weighted avg": {
+        "precision": 0.9929560250652302,
+        "recall": 0.9928556195350821,
+        "f1-score": 0.9928657973693602,
+        "support": 9378.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        3712,
+        3,
+        25,
+        11,
+        0,
+        15
+      ],
+      [
+        2,
+        1902,
+        2,
+        0,
+        0,
+        1
+      ],
+      [
+        6,
+        1,
+        2219,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        827,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        291,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        360
+      ]
+    ]
+  },
+  "validation": {
+    "n_images": 2014,
+    "accuracy": 0.9652432969215492,
+    "macro_precision": 0.9501715649491834,
+    "macro_recall": 0.9689169330913785,
+    "macro_f1": 0.9592833002153672,
+    "weighted_f1": 0.9653203624505162,
+    "classwise": {
+      "Apple Scab": {
+        "precision": 0.9797979797979798,
+        "recall": 0.9603960396039604,
+        "f1-score": 0.97,
+        "support": 808.0
+      },
+      "Rust": {
+        "precision": 0.9803921568627451,
+        "recall": 0.9779951100244498,
+        "f1-score": 0.9791921664626683,
+        "support": 409.0
+      },
+      "Frogeye Leaf Spot": {
+        "precision": 0.9501039501039501,
+        "recall": 0.9560669456066946,
+        "f1-score": 0.9530761209593326,
+        "support": 478.0
+      },
+      "Powdery Mildew": {
+        "precision": 0.9459459459459459,
+        "recall": 0.9831460674157303,
+        "f1-score": 0.9641873278236914,
+        "support": 178.0
+      },
+      "Alternaria Leaf Spot": {
+        "precision": 0.9545454545454546,
+        "recall": 1.0,
+        "f1-score": 0.9767441860465116,
+        "support": 63.0
+      },
+      "Healthy": {
+        "precision": 0.8902439024390244,
+        "recall": 0.9358974358974359,
+        "f1-score": 0.9125,
+        "support": 78.0
+      },
+      "accuracy": 0.9652432969215492,
+      "macro avg": {
+        "precision": 0.9501715649491834,
+        "recall": 0.9689169330913785,
+        "f1-score": 0.9592833002153672,
+        "support": 2014.0
+      },
+      "weighted avg": {
+        "precision": 0.9656209604708563,
+        "recall": 0.9652432969215492,
+        "f1-score": 0.9653203624505162,
+        "support": 2014.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        776,
+        0,
+        17,
+        8,
+        1,
+        6
+      ],
+      [
+        3,
+        400,
+        5,
+        0,
+        0,
+        1
+      ],
+      [
+        9,
+        7,
+        457,
+        1,
+        2,
+        2
+      ],
+      [
+        2,
+        0,
+        1,
+        175,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        63,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1,
+        0,
+        73
+      ]
+    ]
+  },
+  "test": {
+    "n_images": 2013,
+    "accuracy": 0.9706905116741182,
+    "macro_precision": 0.961705978513383,
+    "macro_recall": 0.9640621662461301,
+    "macro_f1": 0.9626907540739299,
+    "weighted_f1": 0.9707162801197551,
+    "classwise": {
+      "Apple Scab": {
+        "precision": 0.9761606022584692,
+        "recall": 0.9628712871287128,
+        "f1-score": 0.9694704049844237,
+        "support": 808.0
+      },
+      "Rust": {
+        "precision": 0.9829268292682927,
+        "recall": 0.9853300733496333,
+        "f1-score": 0.9841269841269841,
+        "support": 409.0
+      },
+      "Frogeye Leaf Spot": {
+        "precision": 0.9688796680497925,
+        "recall": 0.9790356394129979,
+        "f1-score": 0.9739311783107404,
+        "support": 477.0
+      },
+      "Powdery Mildew": {
+        "precision": 0.9453551912568307,
+        "recall": 0.9719101123595506,
+        "f1-score": 0.9584487534626038,
+        "support": 178.0
+      },
+      "Alternaria Leaf Spot": {
+        "precision": 0.9833333333333333,
+        "recall": 0.9365079365079365,
+        "f1-score": 0.959349593495935,
+        "support": 63.0
+      },
+      "Healthy": {
+        "precision": 0.9135802469135802,
+        "recall": 0.9487179487179487,
+        "f1-score": 0.9308176100628931,
+        "support": 78.0
+      },
+      "accuracy": 0.9706905116741182,
+      "macro avg": {
+        "precision": 0.961705978513383,
+        "recall": 0.9640621662461301,
+        "f1-score": 0.9626907540739299,
+        "support": 2013.0
+      },
+      "weighted avg": {
+        "precision": 0.9708857052947347,
+        "recall": 0.9706905116741182,
+        "f1-score": 0.9707162801197551,
+        "support": 2013.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        778,
+        1,
+        14,
+        8,
+        0,
+        7
+      ],
+      [
+        6,
+        403,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        5,
+        467,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        0,
+        1,
+        173,
+        0,
+        0
+      ],
+      [
+        3,
+        1,
+        0,
+        0,
+        59,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        1,
+        1,
+        74
+      ]
+    ]
+  },
+  "major_confusions": [
+    {
+      "classes": [
+        "Apple Scab",
+        "Frogeye Leaf Spot"
+      ],
+      "total_bidirectional_errors": 18,
+      "first_to_second": 14,
+      "second_to_first": 4
+    },
+    {
+      "classes": [
+        "Apple Scab",
+        "Powdery Mildew"
+      ],
+      "total_bidirectional_errors": 12,
+      "first_to_second": 8,
+      "second_to_first": 4
+    },
+    {
+      "classes": [
+        "Apple Scab",
+        "Healthy"
+      ],
+      "total_bidirectional_errors": 9,
+      "first_to_second": 7,
+      "second_to_first": 2
+    },
+    {
+      "classes": [
+        "Apple Scab",
+        "Rust"
+      ],
+      "total_bidirectional_errors": 7,
+      "first_to_second": 1,
+      "second_to_first": 6
+    },
+    {
+      "classes": [
+        "Rust",
+        "Frogeye Leaf Spot"
+      ],
+      "total_bidirectional_errors": 5,
+      "first_to_second": 0,
+      "second_to_first": 5
+    }
+  ],
+  "inference": {
+    "device": "cuda",
+    "hardware": "NVIDIA H100 80GB HBM3 MIG 3g.40gb",
+    "batch_size": 1,
+    "forward_samples": 50,
+    "forward_median_ms": 2.829859993653372,
+    "forward_p95_ms": 3.4586341644171625,
+    "preprocess_and_forward_median_ms": 6.526071025291458,
+    "excludes": "Model loading, file decoding, upload, and Grad-CAM."
+  },
+  "parameter_count": 23520326,
+  "checkpoint_size_bytes": 94403358
+}

@@ -1,0 +1,12 @@
+{
+  "low_confidence_warning_verified": true,
+  "empty_upload_app_passed": true,
+  "uploaded_image_flow_passed": true,
+  "inference_matches_direct_api": true,
+  "gradcam_executed": true,
+  "ranked_class_rows": 6,
+  "input_injection": "File uploader return value patched because AppTest has no native upload setter; inference and Grad-CAM executed normally.",
+  "tested_image": "data/raw/AppleLeaf9-main/Scab/Scab (3843).jpg",
+  "prediction": "Apple Scab",
+  "confidence": 0.999932050704956
+}

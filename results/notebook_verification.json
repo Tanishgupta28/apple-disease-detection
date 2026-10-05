@@ -1,0 +1,26 @@
+[
+  {
+    "notebook": "notebooks/01_dataset_exploration.ipynb",
+    "executed_without_errors": true,
+    "execution_seconds": 2.60202172602294,
+    "training_toggles_disabled": true
+  },
+  {
+    "notebook": "notebooks/02_custom_cnn.ipynb",
+    "executed_without_errors": true,
+    "execution_seconds": 2.937172865960747,
+    "training_toggles_disabled": true
+  },
+  {
+    "notebook": "notebooks/03_transfer_learning.ipynb",
+    "executed_without_errors": true,
+    "execution_seconds": 3.270834122027736,
+    "training_toggles_disabled": true
+  },
+  {
+    "notebook": "notebooks/04_evaluation_and_gradcam.ipynb",
+    "executed_without_errors": true,
+    "execution_seconds": 2.109525891020894,
+    "training_toggles_disabled": true
+  }
+]

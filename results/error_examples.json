@@ -1,0 +1,116 @@
+{
+  "correct_high_confidence": [
+    {
+      "path": "data/raw/AppleLeaf9-main/Scab/Scab (200).jpg",
+      "true": "Apple Scab",
+      "predicted": "Apple Scab",
+      "confidence": 1.0
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Rust/Rust (151).jpg",
+      "true": "Rust",
+      "predicted": "Rust",
+      "confidence": 1.0
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Rust/Rust (2475).jpg",
+      "true": "Rust",
+      "predicted": "Rust",
+      "confidence": 1.0
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Powdery mildew/Powdery mildew (2127).jpg",
+      "true": "Powdery Mildew",
+      "predicted": "Powdery Mildew",
+      "confidence": 1.0
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Powdery mildew/Powdery mildew (1395).jpg",
+      "true": "Powdery Mildew",
+      "predicted": "Powdery Mildew",
+      "confidence": 1.0
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Scab/Scab (4882).jpg",
+      "true": "Apple Scab",
+      "predicted": "Apple Scab",
+      "confidence": 1.0
+    }
+  ],
+  "wrong_high_confidence": [
+    {
+      "path": "data/raw/AppleLeaf9-main/Scab/Scab (44).jpg",
+      "true": "Apple Scab",
+      "predicted": "Healthy",
+      "confidence": 0.999940037727356
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Rust/Rust (765).jpg",
+      "true": "Rust",
+      "predicted": "Apple Scab",
+      "confidence": 0.9999144077301025
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Frogeye leaf spot/Frogeye leaf spot (1283).jpg",
+      "true": "Frogeye Leaf Spot",
+      "predicted": "Rust",
+      "confidence": 0.999441921710968
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Powdery mildew/Powdery mildew (1560).jpg",
+      "true": "Powdery Mildew",
+      "predicted": "Apple Scab",
+      "confidence": 0.9981392621994019
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Scab/Scab (3892).jpg",
+      "true": "Apple Scab",
+      "predicted": "Frogeye Leaf Spot",
+      "confidence": 0.9960088729858398
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Frogeye leaf spot/Frogeye leaf spot (230).jpg",
+      "true": "Frogeye Leaf Spot",
+      "predicted": "Powdery Mildew",
+      "confidence": 0.9955131411552429
+    }
+  ],
+  "low_confidence": [
+    {
+      "path": "data/raw/AppleLeaf9-main/Health/Health (324).jpg",
+      "true": "Healthy",
+      "predicted": "Alternaria Leaf Spot",
+      "confidence": 0.2899149954319
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Health/Health (466).jpg",
+      "true": "Healthy",
+      "predicted": "Powdery Mildew",
+      "confidence": 0.39231187105178833
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Health/Health (357).jpg",
+      "true": "Healthy",
+      "predicted": "Apple Scab",
+      "confidence": 0.49045035243034363
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Scab/Scab (1595).jpg",
+      "true": "Apple Scab",
+      "predicted": "Powdery Mildew",
+      "confidence": 0.5023967623710632
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Scab/Scab (774).jpg",
+      "true": "Apple Scab",
+      "predicted": "Frogeye Leaf Spot",
+      "confidence": 0.5159130096435547
+    },
+    {
+      "path": "data/raw/AppleLeaf9-main/Scab/Scab (1342).jpg",
+      "true": "Apple Scab",
+      "predicted": "Apple Scab",
+      "confidence": 0.5221701264381409
+    }
+  ]
+}

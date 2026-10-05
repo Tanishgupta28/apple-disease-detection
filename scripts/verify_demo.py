@@ -27,7 +27,15 @@ def main():
     assert app.metric[0].value==f"{expected['confidence']:.1%}"
     assert app.checkbox[0].value is True
     assert len(app.dataframe[0].value)==6
-    report={'empty_upload_app_passed':True,'uploaded_image_flow_passed':True,
+    import json
+    low_path=json.loads((ROOT/'results/error_examples.json').read_text())['low_confidence'][0]['path']
+    with Image.open(ROOT/low_path) as low_image:
+        low_buffer=io.BytesIO();low_image.convert('RGB').save(low_buffer,format='PNG');low_buffer.seek(0)
+    with patch('streamlit.file_uploader',return_value=low_buffer):
+        low_app=AppTest.from_file(str(ROOT/'app.py'),default_timeout=60).run()
+    assert not low_app.exception
+    assert any(item.value=='Prediction confidence is low. Try a clearer image of a single apple leaf.' for item in low_app.warning)
+    report={'low_confidence_warning_verified':True,'empty_upload_app_passed':True,'uploaded_image_flow_passed':True,
         'inference_matches_direct_api':True,'gradcam_executed':True,'ranked_class_rows':6,
         'input_injection':'File uploader return value patched because AppTest has no native upload setter; inference and Grad-CAM executed normally.',
         'tested_image':row.path,'prediction':expected['predicted_class'],'confidence':expected['confidence']}

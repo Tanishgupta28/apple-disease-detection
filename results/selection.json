@@ -1,0 +1,18 @@
+{
+  "selection_rule": "Maximum validation macro F1; ties by lower validation cross entropy.",
+  "selected_experiment": "resnet50_finetuned",
+  "validation": {
+    "loss": 0.12482545169867121,
+    "accuracy": 0.9652432969215492,
+    "macro_f1": 0.9592833002153672
+  },
+  "test_accessed_during_training": false,
+  "candidates": [
+    "custom_cnn",
+    "mobilenetv2_frozen",
+    "mobilenetv2_finetuned",
+    "resnet50_frozen",
+    "resnet50_finetuned"
+  ],
+  "checkpoint_sha256": "48fde2b0f9232e7ef39b0c89a8667296c45141bd6512557fe4e2eef1e04eec2c"
+}
