@@ -30,7 +30,7 @@ def run_epoch(model, loader, criterion, device, optimizer=None, architecture='cu
     return {'loss':total_loss/len(labels),'accuracy':float(accuracy_score(labels,predictions)),
             'macro_f1':float(f1_score(labels,predictions,labels=list(range(6)),average='macro',zero_division=0))}
 
-def train_phase(model,name,phase,config,loaders_by_split,device,weights):
+def train_phase(model,name,phase,config,loaders_by_split,device,weights,run_root=ROOT):
     """Save best validation macro-F1 checkpoint; use loss to break exact ties."""
     configure_phase(model,name,phase=='finetuned')
     epochs=config['cnn_epochs'] if name=='custom_cnn' else config['finetune_epochs' if phase=='finetuned' else 'head_epochs']
@@ -40,7 +40,7 @@ def train_phase(model,name,phase,config,loaders_by_split,device,weights):
     training_loss=nn.CrossEntropyLoss(weight=weights.to(device))
     validation_loss=nn.CrossEntropyLoss()  # Uniform loss for comparable validation.
     experiment=f'{name}_{phase}' if name!='custom_cnn' else name
-    checkpoint=ROOT/'models'/f'{experiment}.pth'
+    checkpoint=run_root/'models'/f'{experiment}.pth'
     history=[];best_score=-1.;best_loss=float('inf');stale=0;best_epoch=0;early_best=-1.
     start=time.perf_counter()
     print(f'EXPERIMENT {experiment}, device={device}, trainable={sum(p.numel() for p in model.parameters() if p.requires_grad):,}',flush=True)
@@ -63,7 +63,7 @@ def train_phase(model,name,phase,config,loaders_by_split,device,weights):
         if score>early_best+config['min_delta']:early_best=score;stale=0
         else:stale+=1
         scheduler.step(validation['loss'])
-        save_json(ROOT/'results'/f'{experiment}_history.json',history)
+        save_json(run_root/'results'/f'{experiment}_history.json',history)
         if stale>=config['patience']:
             print('Early stopping on validation macro F1',flush=True);break
     best=torch.load(checkpoint,map_location=device,weights_only=True);model.load_state_dict(best['state_dict'])
@@ -72,11 +72,11 @@ def train_phase(model,name,phase,config,loaders_by_split,device,weights):
         'parameter_count':sum(p.numel() for p in model.parameters()),
         'checkpoint_size_bytes':checkpoint.stat().st_size,'training_seconds':time.perf_counter()-start,
         'checkpoint_sha256':hashlib.sha256(checkpoint.read_bytes()).hexdigest()}
-    save_json(ROOT/'results'/f'{experiment}_summary.json',summary)
-    plot_history(experiment,history)
+    save_json(run_root/'results'/f'{experiment}_summary.json',summary)
+    plot_history(experiment,history,run_root)
     return summary
 
-def plot_history(experiment,history):
+def plot_history(experiment,history,run_root=ROOT):
     """Label full-epoch training and deterministic validation curves separately."""
     import matplotlib;matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -86,22 +86,22 @@ def plot_history(experiment,history):
             ax.plot([r['epoch'] for r in history],[r[split][key] for r in history],label=split)
         ax.set_xlabel('Epoch');ax.set_ylabel(key.title());ax.legend()
     fig.suptitle(experiment);fig.tight_layout()
-    fig.savefig(ROOT/'results/figures'/f'{experiment}_history.png',dpi=140);plt.close(fig)
+    fig.savefig(run_root/'results/figures'/f'{experiment}_history.png',dpi=140);plt.close(fig)
 
-def refresh_comparison():
+def refresh_comparison(run_root=ROOT):
     """Persist real validation results and select a winner without opening test data."""
     import json
     names=['custom_cnn','mobilenetv2_frozen','mobilenetv2_finetuned','resnet50_frozen','resnet50_finetuned']
-    summaries=[json.loads((ROOT/'results'/f'{n}_summary.json').read_text()) for n in names if (ROOT/'results'/f'{n}_summary.json').exists()]
+    summaries=[json.loads((run_root/'results'/f'{n}_summary.json').read_text()) for n in names if (run_root/'results'/f'{n}_summary.json').exists()]
     rows=[{'experiment':s['experiment'],'train_accuracy_at_best_epoch':s['best_epoch_training']['accuracy'],
         'validation_accuracy':s['validation']['accuracy'],'validation_macro_f1':s['validation']['macro_f1'],
         'validation_loss':s['validation']['loss'],'best_epoch':s['epoch'],'epochs_run':s['epochs_run'],
         'parameters':s['parameter_count'],'model_size_mb':s['checkpoint_size_bytes']/1e6} for s in summaries]
-    pd.DataFrame(rows).to_csv(ROOT/'results/model_comparison.csv',index=False)
+    pd.DataFrame(rows).to_csv(run_root/'results/model_comparison.csv',index=False)
     if len(summaries)==5:
         winner=max(summaries,key=lambda s:(s['validation']['macro_f1'],-s['validation']['loss']))
-        save_json(ROOT/'models/selected_model.json',winner)
-        save_json(ROOT/'results/selection.json',{'selection_rule':'Maximum validation macro F1; ties by lower validation cross entropy.',
+        save_json(run_root/'models/selected_model.json',winner)
+        save_json(run_root/'results/selection.json',{'selection_rule':'Maximum validation macro F1; ties by lower validation cross entropy.',
             'selected_experiment':winner['experiment'],'validation':winner['validation'],
             'test_accessed_during_training':False,'candidates':names,
             'checkpoint_sha256':winner['checkpoint_sha256']})
@@ -109,8 +109,11 @@ def refresh_comparison():
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--model',choices=['all','custom_cnn','mobilenetv2','resnet50'],default='all')
-    parser.add_argument('--config');parser.add_argument('--resume',action='store_true');args=parser.parse_args();config=load_config(args.config)
-    if (ROOT/'results/metrics.json').exists():raise RuntimeError('This benchmark has already been tested. Preserve its results; use a deliberately separate benchmark for new training.')
+    parser.add_argument('--config');parser.add_argument('--run-dir',default='.');parser.add_argument('--resume',action='store_true');args=parser.parse_args();config=load_config(args.config)
+    run_root=(ROOT/args.run_dir).resolve()
+    if not run_root.is_relative_to(ROOT):raise ValueError('Run directory must stay within this project root')
+    for folder in ['models','results/figures']:(run_root/folder).mkdir(parents=True,exist_ok=True)
+    if (run_root/'results/metrics.json').exists():raise RuntimeError('This benchmark has already been tested. Preserve its results; use a deliberately separate benchmark for new training.')
     if config['require_cuda'] and not torch.cuda.is_available():raise RuntimeError('CUDA required: no visible GPU. Fix environment before training.')
     device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('GPU:',torch.cuda.get_device_name() if device.type=='cuda' else 'CPU',flush=True)
@@ -118,14 +121,14 @@ def main():
     torch.set_num_threads(8)
     summaries=[]
     for name in ['custom_cnn','mobilenetv2','resnet50'] if args.model=='all' else [args.model]:
-        if args.resume and name=='custom_cnn' and (ROOT/'results/custom_cnn_summary.json').exists():
-            print('Reusing completed custom CNN baseline.',flush=True);refresh_comparison();continue
+        if args.resume and name=='custom_cnn' and (run_root/'results/custom_cnn_summary.json').exists():
+            print('Reusing completed custom CNN baseline.',flush=True);refresh_comparison(run_root);continue
         seed_everything(config['seed']);data=loaders(config);weights=class_weights(config)
         model=build_model(name).to(device)
-        summaries.append(train_phase(model,name,'baseline' if name=='custom_cnn' else 'frozen',config,data,device,weights))
-        refresh_comparison()
+        summaries.append(train_phase(model,name,'baseline' if name=='custom_cnn' else 'frozen',config,data,device,weights,run_root))
+        refresh_comparison(run_root)
         if name!='custom_cnn':
-            summaries.append(train_phase(model,name,'finetuned',config,data,device,weights));refresh_comparison()
+            summaries.append(train_phase(model,name,'finetuned',config,data,device,weights,run_root));refresh_comparison(run_root)
         del model,data
         if device.type=='cuda':torch.cuda.empty_cache()
     print('Training completed.',flush=True)

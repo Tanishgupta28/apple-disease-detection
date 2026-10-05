@@ -54,7 +54,7 @@ def benchmark(model,metadata,device,image):
         'preprocess_and_forward_median_ms':float(np.median(end_to_end)),
         'excludes':'Model loading, file decoding, upload, and Grad-CAM.'}
 
-def figures(report,rows,probabilities,model,metadata,device):
+def figures(report,rows,probabilities,model,metadata,device,run_root=ROOT):
     """Plot confusion/F1, selected errors, and representative Grad-CAM examples."""
     import matplotlib;matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -64,10 +64,10 @@ def figures(report,rows,probabilities,model,metadata,device):
     ax.set_xlabel('Predicted class');ax.set_ylabel('True class');ax.set_title('Untouched test set — raw counts')
     for i in range(6):
         for j in range(6):ax.text(j,i,str(cm[i,j]),ha='center',va='center',color='white' if cm[i,j]>cm.max()/2 else 'black')
-    fig.tight_layout();fig.savefig(ROOT/'results/figures/confusion_matrix.png',dpi=160);plt.close(fig)
+    fig.tight_layout();fig.savefig(run_root/'results/figures/confusion_matrix.png',dpi=160);plt.close(fig)
     fig,ax=plt.subplots(figsize=(10,5));ax.bar(classes,[report['test']['classwise'][c]['f1-score'] for c in classes])
     ax.set_ylim(0,1);ax.set_ylabel('Test F1');ax.tick_params(axis='x',rotation=20)
-    fig.tight_layout();fig.savefig(ROOT/'results/figures/classwise_f1.png',dpi=150);plt.close(fig)
+    fig.tight_layout();fig.savefig(run_root/'results/figures/classwise_f1.png',dpi=150);plt.close(fig)
     y=rows.label.to_numpy();p=probabilities.argmax(1);confidence=probabilities.max(1)
     correct=np.where(y==p)[0];wrong=np.where(y!=p)[0];low=np.where(confidence<.6)[0]
     categories={'correct_high_confidence':correct[np.argsort(-confidence[correct])][:6],
@@ -84,8 +84,8 @@ def figures(report,rows,probabilities,model,metadata,device):
             ax.set_title(f'True: {classes[y[index]]}\nPredicted: {classes[p[index]]} ({confidence[index]:.1%})',fontsize=10)
             examples[category].append({'path':row.path,'true':classes[y[index]],'predicted':classes[p[index]],'confidence':float(confidence[index])})
         fig.suptitle(category.replace('_',' '));fig.tight_layout()
-        fig.savefig(ROOT/'results/figures'/f'{category}.png',dpi=130);plt.close(fig)
-    save_json(ROOT/'results/error_examples.json',examples)
+        fig.savefig(run_root/'results/figures'/f'{category}.png',dpi=130);plt.close(fig)
+    save_json(run_root/'results/error_examples.json',examples)
     representatives=[]
     for label in range(6):
         candidates=np.where(y==label)[0]
@@ -100,16 +100,18 @@ def figures(report,rows,probabilities,model,metadata,device):
         axes[row_index,0].imshow(image);axes[row_index,0].set_title(f'True: {classes[y[index]]}')
         axes[row_index,1].imshow(heatmap,cmap='jet');axes[row_index,1].set_title('Grad-CAM (predicted class)')
         axes[row_index,2].imshow(overlay(image,heatmap));axes[row_index,2].set_title(f'{classes[predicted]} ({confidence[index]:.1%})')
-    fig.tight_layout();fig.savefig(ROOT/'results/figures/gradcam_examples.png',dpi=100);plt.close(fig)
+    fig.tight_layout();fig.savefig(run_root/'results/figures/gradcam_examples.png',dpi=100);plt.close(fig)
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--config');args=parser.parse_args();config=load_config(args.config)
-    selection=json.loads((ROOT/'results/selection.json').read_text())
-    output=ROOT/'results/metrics.json'
+    parser=argparse.ArgumentParser();parser.add_argument('--config');parser.add_argument('--run-dir',default='.');args=parser.parse_args();config=load_config(args.config)
+    run_root=(ROOT/args.run_dir).resolve()
+    if not run_root.is_relative_to(ROOT):raise ValueError('Run directory must stay within this project root')
+    selection=json.loads((run_root/'results/selection.json').read_text())
+    output=run_root/'results/metrics.json'
     if output.exists():
         print('Test results already exist. Reusing the frozen evaluation; no retraining or repeated test selection.');return
-    model,metadata,device=load_predictor();torch.set_num_threads(8)
-    selected=json.loads((ROOT/'models/selected_model.json').read_text())
+    selected=json.loads((run_root/'models/selected_model.json').read_text())
+    model,metadata,device=load_predictor(ROOT/selected['checkpoint']);torch.set_num_threads(8)
     checkpoint=ROOT/selected['checkpoint']
     if hashlib.sha256(checkpoint.read_bytes()).hexdigest()!=selection['checkpoint_sha256']:
         raise ValueError('Selected checkpoint changed after validation selection')
@@ -133,7 +135,7 @@ def main():
     predictions=test_rows[['path','label','group_id']].copy()
     predictions['predicted_label']=pred;predictions['confidence']=confidence
     for i,c in enumerate(metadata['classes']):predictions[f'probability_{c}']=test_probabilities[:,i]
-    predictions.to_csv(ROOT/'results/test_predictions.csv',index=False)
+    predictions.to_csv(run_root/'results/test_predictions.csv',index=False)
     cm=np.asarray(report['test']['confusion_matrix']);confusions=[]
     for i in range(6):
         for j in range(i+1,6):
@@ -143,7 +145,7 @@ def main():
     report['major_confusions']=sorted(confusions,key=lambda r:r['total_bidirectional_errors'],reverse=True)[:5]
     with Image.open(ROOT/test_rows.iloc[0].path) as im:report['inference']=benchmark(model,metadata,device,im.convert('RGB'))
     report['parameter_count']=selected['parameter_count'];report['checkpoint_size_bytes']=checkpoint.stat().st_size
-    figures(report,test_rows,test_probabilities,model,metadata,device)
+    figures(report,test_rows,test_probabilities,model,metadata,device,run_root)
     save_json(output,report);print(json.dumps(report,indent=2),flush=True)
 
 if __name__=='__main__':main()

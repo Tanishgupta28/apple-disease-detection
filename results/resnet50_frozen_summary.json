@@ -1,0 +1,47 @@
+{
+  "architecture": "resnet50",
+  "experiment": "resnet50_frozen",
+  "classes": [
+    "Apple Scab",
+    "Rust",
+    "Frogeye Leaf Spot",
+    "Powdery Mildew",
+    "Alternaria Leaf Spot",
+    "Healthy"
+  ],
+  "image_size": 224,
+  "normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "epoch": 8,
+  "validation": {
+    "loss": 0.6096316291298625,
+    "accuracy": 0.8152929493545183,
+    "macro_f1": 0.802121361198265
+  },
+  "seed": 42,
+  "split_manifest_sha256": "7260910dfb0d13be742d223b5ea0dfd28c8998081c778fa80806ae0743013076",
+  "device": "cuda",
+  "gpu": "NVIDIA H100 80GB HBM3 MIG 3g.40gb",
+  "pretrained_weights": "IMAGENET1K_V2",
+  "checkpoint": "models/resnet50_frozen.pth",
+  "best_epoch_training": {
+    "loss": 0.4948808747101603,
+    "accuracy": 0.8196843676690125,
+    "macro_f1": 0.787300431654629
+  },
+  "epochs_run": 8,
+  "parameter_count": 23520326,
+  "checkpoint_size_bytes": 94402322,
+  "training_seconds": 131.4042710629874,
+  "checkpoint_sha256": "35cfc9e5b65cf4e9c79109e314d87c42efeff5315ded4dcbf75f37fe53a43d01"
+}

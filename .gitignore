@@ -22,3 +22,5 @@ mlruns/
 *.tar.gz
 kaggle.json
 credentials*.json
+runs/
+*.part
