@@ -1,0 +1,25 @@
+{
+  "weights": "artifacts/yolo_pretrained/yolo11n.pt",
+  "detections": [
+    {
+      "class": "cake",
+      "confidence": 0.6383824944496155,
+      "xyxy": [
+        13.953224182128906,
+        15.992491722106934,
+        132.89364624023438,
+        129.12106323242188
+      ]
+    }
+  ],
+  "evaluation_metrics": null,
+  "scope": "Generic COCO object detector inference only; NOT apple disease detection",
+  "input": "Train/Normal_Apple/1.jpg",
+  "expected_object_from_visual_inspection": "apple fruit",
+  "observed_failure": "Predicted cake for the apple image",
+  "custom_disease_training_status": "not completed",
+  "weight_source": "https://huggingface.co/Ultralytics/YOLO11/resolve/4839c432499b0dba0559c31a35f8b44c68ff81a6/yolo11n.pt",
+  "weights_sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+  "ultralytics_version": "8.4.175",
+  "torch_version": "2.14.1"
+}

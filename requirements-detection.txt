@@ -1,0 +1,3 @@
+-r requirements-four-class.txt
+ultralytics>=8.3,<9
+roboflow>=1.1,<2
