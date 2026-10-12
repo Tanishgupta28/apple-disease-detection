@@ -1,0 +1,6 @@
+{
+  "model": "ann",
+  "criterion": "minimum validation loss",
+  "test_used_for_selection": false,
+  "checkpoint_sha256": "ce726fa0aecdfb25c4f9ed338669d2779bdf07264ef9a46aedeaca9811a453ed"
+}

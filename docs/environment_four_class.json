@@ -1,0 +1,22 @@
+{
+  "python": "3.12.6",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "tensorflow_gpus": [],
+  "gpu_hardware": "Intel Iris Xe integrated graphics; nvidia-smi unavailable",
+  "cuda_available": false,
+  "gpu_memory_bytes": null,
+  "free_disk_bytes_at_audit": 26174414848,
+  "packages": {
+    "tensorflow": "2.20.0",
+    "keras": "3.12.0",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "scikit-image": "0.26.0",
+    "opencv-python": "4.12.0.88",
+    "pillow": "12.0.0",
+    "streamlit": "1.65.0",
+    "pytest": "9.1.1",
+    "imagehash": "4.3.2"
+  }
+}

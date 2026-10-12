@@ -1,0 +1,13 @@
+# Tested dependency versions are recorded in docs/environment_four_class.json.
+tensorflow>=2.20,<2.21
+numpy>=2.0,<2.3
+pandas>=2.2,<3
+scikit-learn>=1.7,<1.8
+scikit-image>=0.25,<0.27
+opencv-python>=4.12,<4.13
+Pillow>=11,<13
+ImageHash>=4.3,<5
+matplotlib>=3.10,<3.11
+PyYAML>=6,<7
+streamlit>=1.50,<2
+pytest>=8,<10

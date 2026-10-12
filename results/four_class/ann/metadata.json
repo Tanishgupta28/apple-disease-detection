@@ -1,0 +1,57 @@
+{
+  "model": "ann",
+  "classes": [
+    "Blotch",
+    "Rot",
+    "Scab",
+    "Normal"
+  ],
+  "image_size": 96,
+  "glcm": {
+    "levels": 32,
+    "distances": [
+      1,
+      2,
+      4
+    ],
+    "angles": [
+      0,
+      0.7853981633974483,
+      1.5707963267948966,
+      2.356194490192345
+    ]
+  },
+  "feature_names": [
+    "contrast_mean",
+    "contrast_std",
+    "homogeneity_mean",
+    "homogeneity_std",
+    "energy_mean",
+    "energy_std",
+    "correlation_mean",
+    "correlation_std",
+    "dissimilarity_mean",
+    "dissimilarity_std"
+  ],
+  "manifest_sha256": "4d24735148e4e646973a74d9fce3c6b3cc077ee65ede799c13c9b10bd9029c74",
+  "checkpoint_sha256": "ce726fa0aecdfb25c4f9ed338669d2779bdf07264ef9a46aedeaca9811a453ed",
+  "selected_phase": "training",
+  "selection_metric": "validation_loss",
+  "validation": {
+    "accuracy": 0.5428571701049805,
+    "loss": 1.125488519668579
+  },
+  "class_weights": {
+    "0": 0.84375,
+    "1": 0.8333333333333334,
+    "2": 1.0714285714285714,
+    "3": 1.4673913043478262
+  },
+  "training_seconds": 15.428894500015303,
+  "parameters": 969,
+  "tensorflow_version": "2.20.0",
+  "seed": 42,
+  "gpu_devices": [],
+  "status": "trained",
+  "data_scope": "recovered four-class apple fruit dataset"
+}

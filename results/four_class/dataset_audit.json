@@ -1,0 +1,57 @@
+{
+  "source": "Recovered local appledisease Train/Test folders; original publisher/license unverified",
+  "seed": 42,
+  "classes": [
+    "Blotch",
+    "Rot",
+    "Scab",
+    "Normal"
+  ],
+  "valid_image_files": 502,
+  "unique_byte_hashes": 472,
+  "unique_pixel_hashes": 472,
+  "corrupt_files": [],
+  "ignored_files": [],
+  "near_duplicate_hamming": 6,
+  "near_pair_count": 96,
+  "status_counts": {
+    "included": 459,
+    "related_to_original_test": 11,
+    "exact_duplicate": 30,
+    "conflicting_labels": 2
+  },
+  "raw_class_counts": {
+    "Blotch": 146,
+    "Rot": 152,
+    "Scab": 113,
+    "Normal": 91
+  },
+  "included_class_counts": {
+    "Blotch": 131,
+    "Rot": 139,
+    "Scab": 107,
+    "Normal": 82
+  },
+  "split_counts": {
+    "test": {
+      "Blotch": 30,
+      "Normal": 24,
+      "Rot": 37,
+      "Scab": 28
+    },
+    "train": {
+      "Blotch": 80,
+      "Normal": 46,
+      "Rot": 81,
+      "Scab": 63
+    },
+    "validation": {
+      "Blotch": 21,
+      "Normal": 12,
+      "Rot": 21,
+      "Scab": 16
+    }
+  },
+  "validation_fraction_of_remaining_original_train": 0.2,
+  "test_policy": "Retain original Test images after deduplication/conflict quarantine; exclude related Train images"
+}

@@ -1,3 +1,5 @@
+> **October 2026 four-class rebuild in progress:** see [current implementation and verified data audit](docs/FOUR_CLASS_STATUS.md). The six-class results below belong to a separate prior project and are not results for the new TensorFlow fruit classifier.
+
 # Apple Disease Detection from Apple Leaf Images
 
 A reproducible, interview-focused rebuild of an **NIT internship project**: classify an apple leaf into five diseases plus Healthy, compare three understandable CNN architectures, and inspect predictions using Grad-CAM.

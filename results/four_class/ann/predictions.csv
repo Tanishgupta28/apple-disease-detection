@@ -1,0 +1,120 @@
+path,label,class_name,split,prediction,p_Blotch,p_Rot,p_Scab,p_Normal
+Test/Blotch_Apple/120.jpg,0,Blotch,test,0,0.48122317,0.09358761,0.37628254,0.048906695
+Test/Blotch_Apple/121.jpg,0,Blotch,test,2,0.21135949,0.0363417,0.57554686,0.17675191
+Test/Blotch_Apple/122.jpg,0,Blotch,test,0,0.5246678,0.14088064,0.26981968,0.06463191
+Test/Blotch_Apple/123.jpg,0,Blotch,test,2,0.3597949,0.16171144,0.4032068,0.075286835
+Test/Blotch_Apple/124.jpg,0,Blotch,test,0,0.70858496,0.1504563,0.11075077,0.03020792
+Test/Blotch_Apple/125.jpg,0,Blotch,test,0,0.50871575,0.16857131,0.2544924,0.06822059
+Test/Blotch_Apple/126.jpg,0,Blotch,test,2,0.16669573,0.05360876,0.508517,0.27117842
+Test/Blotch_Apple/127.jpg,0,Blotch,test,0,0.46900833,0.19027783,0.28462604,0.056087796
+Test/Blotch_Apple/128.jpg,0,Blotch,test,2,0.3205936,0.1304878,0.37669575,0.17222285
+Test/Blotch_Apple/129.jpg,0,Blotch,test,0,0.51779914,0.12301922,0.29902768,0.060153987
+Test/Blotch_Apple/130.jpg,0,Blotch,test,3,0.12578535,0.033646386,0.37894055,0.46162763
+Test/Blotch_Apple/131.jpg,0,Blotch,test,0,0.4316364,0.072048515,0.4026106,0.093704455
+Test/Blotch_Apple/132.jpg,0,Blotch,test,2,0.24661328,0.15804492,0.3082547,0.28708705
+Test/Blotch_Apple/133.jpg,0,Blotch,test,0,0.5105783,0.19611116,0.22960828,0.06370231
+Test/Blotch_Apple/134.jpg,0,Blotch,test,1,0.038065873,0.55251336,0.025352076,0.38406867
+Test/Blotch_Apple/135.jpg,0,Blotch,test,1,0.06175427,0.4652622,0.048032593,0.42495093
+Test/Blotch_Apple/136.jpg,0,Blotch,test,2,0.33474645,0.103857346,0.41716254,0.1442336
+Test/Blotch_Apple/137.jpg,0,Blotch,test,2,0.40840632,0.06553468,0.40908244,0.11697651
+Test/Blotch_Apple/138.jpg,0,Blotch,test,0,0.64096147,0.06323638,0.24475949,0.05104269
+Test/Blotch_Apple/139.jpg,0,Blotch,test,0,0.72569716,0.07139357,0.1778753,0.02503397
+Test/Blotch_Apple/140.jpg,0,Blotch,test,0,0.45476288,0.08299543,0.29613426,0.1661074
+Test/Blotch_Apple/141.jpg,0,Blotch,test,0,0.7298377,0.06991337,0.18244475,0.017804205
+Test/Blotch_Apple/142.jpg,0,Blotch,test,0,0.7096508,0.062416475,0.20191911,0.02601363
+Test/Blotch_Apple/143.jpg,0,Blotch,test,2,0.2063848,0.06600772,0.44154692,0.28606057
+Test/Blotch_Apple/144.jpg,0,Blotch,test,0,0.566668,0.23154926,0.12541239,0.076370314
+Test/Blotch_Apple/145.jpg,0,Blotch,test,0,0.73322725,0.06460236,0.18219015,0.019980257
+Test/Blotch_Apple/146.jpg,0,Blotch,test,0,0.3612306,0.15848951,0.33063385,0.14964601
+Test/Blotch_Apple/147.jpg,0,Blotch,test,2,0.30145487,0.065826006,0.46740744,0.1653117
+Test/Blotch_Apple/148.jpg,0,Blotch,test,0,0.6452984,0.09123173,0.21843506,0.045034725
+Test/Blotch_Apple/149.jpg,0,Blotch,test,0,0.574869,0.0309847,0.34514758,0.04899876
+Test/Rot_Apple/2an77pp.jpg,1,Rot,test,1,0.3282162,0.3891497,0.19417554,0.08845856
+Test/Rot_Apple/2an7852.jpg,1,Rot,test,1,0.2730913,0.5096798,0.13764907,0.07957981
+Test/Rot_Apple/2apbkfh.jpg,1,Rot,test,0,0.7156746,0.08105126,0.16751535,0.035758752
+Test/Rot_Apple/2bnf8pw.jpg,1,Rot,test,1,0.119686596,0.48686975,0.0809205,0.31252316
+Test/Rot_Apple/2bxf73h.jpg,1,Rot,test,1,0.14622635,0.65227544,0.071434006,0.13006411
+Test/Rot_Apple/2c45k83.jpg,1,Rot,test,2,0.23399134,0.14486219,0.3512699,0.26987657
+Test/Rot_Apple/2ckghhj.jpg,1,Rot,test,1,0.047998782,0.5579387,0.03237484,0.36168763
+Test/Rot_Apple/2d0wf7n.jpg,1,Rot,test,1,0.0065930616,0.6857632,0.0036244416,0.30401927
+Test/Rot_Apple/2d56em8.jpg,1,Rot,test,2,0.13060825,0.03884922,0.4196331,0.4109094
+Test/Rot_Apple/2dcmk9m.jpg,1,Rot,test,1,0.06410497,0.56724,0.05124634,0.3174087
+Test/Rot_Apple/2f40jff.jpg,1,Rot,test,1,0.000441191,0.7289389,0.00016545515,0.2704545
+Test/Rot_Apple/a2b2p0.jpg,1,Rot,test,2,0.2175963,0.225462,0.35116863,0.20577307
+Test/Rot_Apple/ar3jth.jpg,1,Rot,test,3,0.090691835,0.13171665,0.34173247,0.43585896
+Test/Rot_Apple/aybx08.jpg,1,Rot,test,2,0.21854217,0.07194048,0.4103702,0.29914707
+Test/Rot_Apple/bwct8k.jpg,1,Rot,test,1,0.040681314,0.54104203,0.026667625,0.39160898
+Test/Rot_Apple/e3afrg.jpg,1,Rot,test,1,0.058213003,0.58499813,0.024378294,0.33241054
+Test/Rot_Apple/egpynx (1).jpg,1,Rot,test,1,0.0029256756,0.7186774,0.0012551593,0.2771418
+Test/Rot_Apple/ey1xed.jpg,1,Rot,test,1,0.009052379,0.66141146,0.005098818,0.32443735
+Test/Rot_Apple/fj4tej.jpg,1,Rot,test,1,0.2991249,0.31343192,0.17430739,0.21313584
+Test/Rot_Apple/istockphoto-173903961-612x612.jpg,1,Rot,test,3,0.10523381,0.13225093,0.2897577,0.47275755
+Test/Rot_Apple/istockphoto-500392531-612x612.jpg,1,Rot,test,1,0.0071012755,0.67355394,0.0041048066,0.31523997
+Test/Rot_Apple/istockphoto-654588270-612x612.jpg,1,Rot,test,1,0.020895889,0.72959507,0.011966709,0.23754236
+Test/Rot_Apple/istockphoto-859980682-612x612.jpg,1,Rot,test,2,0.21690236,0.07108093,0.5371636,0.17485306
+Test/Rot_Apple/istockphoto-878751294-612x612.jpg,1,Rot,test,1,0.0019623651,0.74517864,0.00067295437,0.25218606
+Test/Rot_Apple/jhy6ea.jpg,1,Rot,test,1,0.015158625,0.64703727,0.009557042,0.32824707
+Test/Rot_Apple/kjbwfk.jpg,1,Rot,test,1,0.002010089,0.7442364,0.00070498575,0.25304842
+Test/Rot_Apple/rotten-apple-big-hole-on-260nw-671627224.jpg,1,Rot,test,1,0.024766598,0.6183005,0.014712019,0.34222087
+Test/Rot_Apple/rotten-apple-isolated-on-white-260nw-65162884.jpg,1,Rot,test,1,0.011565021,0.67743456,0.006340092,0.30466038
+Test/Rot_Apple/rotten-apple-on-white-isolated-260nw-1938690064.jpg,1,Rot,test,1,0.0005136279,0.73049474,0.00020192486,0.26878968
+Test/Rot_Apple/rotting-apples-decay-food-waste-260nw-1762452767.jpg,1,Rot,test,1,0.01878785,0.62491155,0.00947098,0.34682962
+Test/Rot_Apple/rtw6ft.jpg,1,Rot,test,1,0.048647035,0.4889842,0.038577333,0.4237915
+Test/Rot_Apple/t00grw.jpg,1,Rot,test,1,0.0014202194,0.72093445,0.0006381724,0.2770072
+Test/Rot_Apple/t83m2k.jpg,1,Rot,test,0,0.5097124,0.122591466,0.28662744,0.08106871
+Test/Rot_Apple/td97ab.jpg,1,Rot,test,1,0.040131155,0.51868486,0.02769909,0.41348493
+Test/Rot_Apple/tx04wa.jpg,1,Rot,test,1,0.019965502,0.6248878,0.009891829,0.3452549
+Test/Rot_Apple/wilted-rotten-apple-isolated-on-260nw-338996867.jpg,1,Rot,test,1,0.00040722667,0.7614584,0.00016833768,0.23796603
+Test/Rot_Apple/wwtx1b.jpg,1,Rot,test,0,0.3443726,0.24111602,0.33913174,0.07537967
+Test/Scab_Apple/17-0814-tree_unknownC_img4-26e35a1-1024x683.jpg,2,Scab,test,3,0.13583566,0.018659348,0.31961578,0.5258893
+Test/Scab_Apple/2c4x4g0.jpg,2,Scab,test,3,0.09908384,0.22511522,0.16355896,0.5122419
+Test/Scab_Apple/2ea9em1.jpg,2,Scab,test,2,0.1153499,0.029602451,0.53245074,0.3225969
+Test/Scab_Apple/ad3gfw.jpg,2,Scab,test,0,0.504935,0.14367592,0.25802365,0.09336538
+Test/Scab_Apple/AnyConv.com__download (10).jpg,2,Scab,test,2,0.26883024,0.05477033,0.4805181,0.19588134
+Test/Scab_Apple/AnyConv.com__download (4).jpg,2,Scab,test,2,0.07525523,0.014799513,0.48736754,0.4225777
+Test/Scab_Apple/AnyConv.com__images (26).jpg,2,Scab,test,0,0.5447516,0.2394391,0.14473191,0.07107743
+Test/Scab_Apple/AnyConv.com__images (3).jpg,2,Scab,test,0,0.5975971,0.092364095,0.2626124,0.04742635
+Test/Scab_Apple/AnyConv.com__images (33).jpg,2,Scab,test,0,0.6323835,0.08576737,0.24654065,0.03530844
+Test/Scab_Apple/AnyConv.com__images (38).jpg,2,Scab,test,0,0.652797,0.18679732,0.12585096,0.03455468
+Test/Scab_Apple/AnyConv.com__images (50).jpg,2,Scab,test,3,0.117860645,0.29658395,0.1782318,0.40732357
+Test/Scab_Apple/AnyConv.com__images (58).jpg,2,Scab,test,0,0.71883345,0.0826315,0.18297957,0.015555515
+Test/Scab_Apple/AnyConv.com__images (65).jpg,2,Scab,test,2,0.23051703,0.15463413,0.4253361,0.18951268
+Test/Scab_Apple/AnyConv.com__images (74).jpg,2,Scab,test,0,0.60504735,0.10460675,0.25615028,0.034195624
+Test/Scab_Apple/AnyConv.com__images (78).jpg,2,Scab,test,2,0.36843905,0.099937,0.39426664,0.13735728
+Test/Scab_Apple/AnyConv.com__images (86).jpg,2,Scab,test,3,0.062766,0.010144352,0.33808532,0.5890043
+Test/Scab_Apple/AnyConv.com__images (90).jpg,2,Scab,test,3,0.14475857,0.031553175,0.40704575,0.4166425
+Test/Scab_Apple/AnyConv.com__images (95).jpg,2,Scab,test,2,0.32418996,0.09350472,0.4207075,0.16159786
+Test/Scab_Apple/AnyConv.com__images (99).jpg,2,Scab,test,2,0.3534099,0.11121014,0.42310268,0.11227735
+Test/Scab_Apple/br31ba.jpg,2,Scab,test,3,0.10785491,0.024743099,0.42686957,0.44053245
+Test/Scab_Apple/DSC_3705-1q4ivwe.jpg,2,Scab,test,0,0.50609636,0.10494701,0.3309455,0.058011062
+Test/Scab_Apple/dw027a.jpg,2,Scab,test,0,0.3428863,0.27344918,0.27734572,0.10631872
+Test/Scab_Apple/esy-001419324.jpg,2,Scab,test,2,0.121544495,0.03924695,0.46406096,0.37514758
+Test/Scab_Apple/F4134795-7A74-49F2-AD2D-C359C79B0852.jpeg,2,Scab,test,2,0.09507226,0.025398886,0.5508024,0.3287264
+Test/Scab_Apple/kex3dm.jpg,2,Scab,test,3,0.071767256,0.033164337,0.42784294,0.4672254
+Test/Scab_Apple/pg4fhm.jpg,2,Scab,test,0,0.5781809,0.20193838,0.13279732,0.087083384
+Test/Scab_Apple/rp3fh8.jpg,2,Scab,test,0,0.63630503,0.13420781,0.16983691,0.05965026
+Test/Scab_Apple/wkpmtc.jpg,2,Scab,test,2,0.26922578,0.20116998,0.42036104,0.109243244
+Test/Normal_Apple/10.jpg,3,Normal,test,0,0.38225937,0.2481765,0.28701484,0.082549214
+Test/Normal_Apple/11.jpg,3,Normal,test,0,0.6832914,0.09084351,0.20518489,0.020680202
+Test/Normal_Apple/21.jpg,3,Normal,test,2,0.2728886,0.17966671,0.41732994,0.1301147
+Test/Normal_Apple/22.jpg,3,Normal,test,0,0.5939362,0.15406607,0.22954951,0.022448182
+Test/Normal_Apple/23.jpg,3,Normal,test,0,0.66680247,0.057227828,0.25124574,0.024723956
+Test/Normal_Apple/32.jpg,3,Normal,test,0,0.5387216,0.24384086,0.1585621,0.058875453
+Test/Normal_Apple/33.jpg,3,Normal,test,0,0.40641278,0.26669803,0.24231562,0.08457357
+Test/Normal_Apple/34.jpg,3,Normal,test,0,0.5712698,0.2111108,0.18869461,0.028924828
+Test/Normal_Apple/44.jpg,3,Normal,test,2,0.32317102,0.18352094,0.33615032,0.15715773
+Test/Normal_Apple/45.jpg,3,Normal,test,2,0.23595925,0.1914319,0.35829264,0.21431625
+Test/Normal_Apple/46.jpg,3,Normal,test,3,0.11984273,0.34619388,0.123553,0.4104103
+Test/Normal_Apple/56.jpg,3,Normal,test,0,0.8090418,0.07815968,0.10836758,0.0044309134
+Test/Normal_Apple/57.jpg,3,Normal,test,0,0.5107229,0.15321587,0.20450084,0.13156049
+Test/Normal_Apple/58.jpg,3,Normal,test,1,0.23929662,0.5252935,0.11866896,0.1167409
+Test/Normal_Apple/68.jpg,3,Normal,test,0,0.5869712,0.17881197,0.19425167,0.039965037
+Test/Normal_Apple/69.jpg,3,Normal,test,0,0.43086103,0.3418815,0.16927853,0.057978973
+Test/Normal_Apple/70.jpg,3,Normal,test,0,0.45286644,0.23993751,0.24255675,0.06463937
+Test/Normal_Apple/70083966-single-orange-or-yellow-color-apple-or-fruit-with-vitamin-for-healthy-diet-isolated-on-white-backgro.jpg,3,Normal,test,1,0.01648595,0.669526,0.009187379,0.3048007
+Test/Normal_Apple/80.jpg,3,Normal,test,3,0.061129183,0.240974,0.085960135,0.6119367
+Test/Normal_Apple/81.jpg,3,Normal,test,0,0.6369526,0.14135566,0.17527476,0.04641696
+Test/Normal_Apple/9.jpg,3,Normal,test,0,0.54725105,0.15213858,0.25887674,0.041733574
+Test/Normal_Apple/images (3).jpg,3,Normal,test,1,0.038461976,0.50072515,0.027980875,0.43283197
+Test/Normal_Apple/images (5).jpg,3,Normal,test,3,0.0477216,0.14661574,0.16837558,0.637287
+Test/Normal_Apple/images (6).jpg,3,Normal,test,2,0.28116396,0.23863435,0.32421413,0.15598758

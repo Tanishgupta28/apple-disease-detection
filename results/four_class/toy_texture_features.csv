@@ -1,0 +1,4 @@
+,contrast_mean,contrast_std,homogeneity_mean,homogeneity_std,energy_mean,energy_std,correlation_mean,correlation_std,dissimilarity_mean,dissimilarity_std
+constant,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0
+checkerboard,160.16667,358.14355,0.8335066,0.3722906,0.70710677,2.2383166e-09,0.6666667,0.74535596,5.1666665,11.553018
+gradient,0.52245116,0.54814094,0.7713831,0.19834101,0.1344445,0.026364772,0.9967677,0.0034750279,0.46810338,0.41798186

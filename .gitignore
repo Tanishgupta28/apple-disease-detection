@@ -24,3 +24,10 @@ kaggle.json
 credentials*.json
 runs/
 *.part
+.local_original_backup/
+apple_disease_classification/
+research papaer seen till now/
+results/local_examples/
+artifacts/
+*.lnk
+desktop.ini

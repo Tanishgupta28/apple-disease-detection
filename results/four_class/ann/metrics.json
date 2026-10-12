@@ -1,0 +1,115 @@
+{
+  "accuracy": 0.48739495798319327,
+  "precision_macro": 0.45574160893454374,
+  "recall_macro": 0.4529681467181467,
+  "f1_macro": 0.4438994813708773,
+  "f1_weighted": 0.4794868903093429,
+  "per_class": {
+    "Blotch": {
+      "precision": 0.391304347826087,
+      "recall": 0.6,
+      "f1-score": 0.47368421052631576,
+      "support": 30.0
+    },
+    "Rot": {
+      "precision": 0.84375,
+      "recall": 0.7297297297297297,
+      "f1-score": 0.782608695652174,
+      "support": 37.0
+    },
+    "Scab": {
+      "precision": 0.35714285714285715,
+      "recall": 0.35714285714285715,
+      "f1-score": 0.35714285714285715,
+      "support": 28.0
+    },
+    "Normal": {
+      "precision": 0.23076923076923078,
+      "recall": 0.125,
+      "f1-score": 0.16216216216216217,
+      "support": 24.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      18,
+      2,
+      9,
+      1
+    ],
+    [
+      3,
+      27,
+      5,
+      2
+    ],
+    [
+      11,
+      0,
+      10,
+      7
+    ],
+    [
+      14,
+      3,
+      4,
+      3
+    ]
+  ],
+  "n_images": 119,
+  "model": "ann",
+  "classes": [
+    "Blotch",
+    "Rot",
+    "Scab",
+    "Normal"
+  ],
+  "image_size": 96,
+  "glcm": {
+    "levels": 32,
+    "distances": [
+      1,
+      2,
+      4
+    ],
+    "angles": [
+      0,
+      0.7853981633974483,
+      1.5707963267948966,
+      2.356194490192345
+    ]
+  },
+  "feature_names": [
+    "contrast_mean",
+    "contrast_std",
+    "homogeneity_mean",
+    "homogeneity_std",
+    "energy_mean",
+    "energy_std",
+    "correlation_mean",
+    "correlation_std",
+    "dissimilarity_mean",
+    "dissimilarity_std"
+  ],
+  "manifest_sha256": "4d24735148e4e646973a74d9fce3c6b3cc077ee65ede799c13c9b10bd9029c74",
+  "checkpoint_sha256": "ce726fa0aecdfb25c4f9ed338669d2779bdf07264ef9a46aedeaca9811a453ed",
+  "selected_phase": "training",
+  "selection_metric": "validation_loss",
+  "validation": {
+    "accuracy": 0.5428571701049805,
+    "loss": 1.125488519668579
+  },
+  "class_weights": {
+    "0": 0.84375,
+    "1": 0.8333333333333334,
+    "2": 1.0714285714285714,
+    "3": 1.4673913043478262
+  },
+  "training_seconds": 15.428894500015303,
+  "parameters": 969,
+  "tensorflow_version": "2.20.0",
+  "seed": 42,
+  "gpu_devices": [],
+  "status": "trained",
+  "data_scope": "recovered four-class apple fruit dataset"
+}
