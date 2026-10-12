@@ -1,0 +1,46 @@
+{
+  "model": "resnet50",
+  "classes": [
+    "Blotch",
+    "Rot",
+    "Scab",
+    "Normal"
+  ],
+  "image_size": 96,
+  "glcm": {
+    "levels": 32,
+    "distances": [
+      1,
+      2,
+      4
+    ],
+    "angles": [
+      0,
+      0.7853981633974483,
+      1.5707963267948966,
+      2.356194490192345
+    ]
+  },
+  "feature_names": null,
+  "manifest_sha256": "4d24735148e4e646973a74d9fce3c6b3cc077ee65ede799c13c9b10bd9029c74",
+  "checkpoint_sha256": "67e7d8ba2d80b696b82df173dcc6f3458da6ea24615a0b6f8407d43647c54cb8",
+  "selected_phase": "head",
+  "selection_metric": "validation_loss",
+  "validation": {
+    "accuracy": 0.8142856955528259,
+    "loss": 0.6825418472290039
+  },
+  "class_weights": {
+    "0": 0.84375,
+    "1": 0.8333333333333334,
+    "2": 1.0714285714285714,
+    "3": 1.4673913043478262
+  },
+  "training_seconds": 110.25293260009494,
+  "parameters": 23595908,
+  "tensorflow_version": "2.20.0",
+  "seed": 42,
+  "gpu_devices": [],
+  "status": "trained",
+  "data_scope": "recovered four-class apple fruit dataset"
+}

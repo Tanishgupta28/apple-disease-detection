@@ -1,0 +1,44 @@
+{
+  "seed": 42,
+  "classes": [
+    "Blotch",
+    "Rot",
+    "Scab",
+    "Normal"
+  ],
+  "image_size": 96,
+  "batch_size": 16,
+  "validation_fraction": 0.2,
+  "near_duplicate_hamming": 6,
+  "glcm": {
+    "levels": 32,
+    "distances": [
+      1,
+      2,
+      4
+    ],
+    "angles": [
+      0,
+      0.7853981633974483,
+      1.5707963267948966,
+      2.356194490192345
+    ]
+  },
+  "ann": {
+    "epochs": 60,
+    "learning_rate": 0.001,
+    "patience": 10
+  },
+  "cnn": {
+    "epochs": 20,
+    "learning_rate": 0.001,
+    "patience": 6
+  },
+  "resnet50": {
+    "head_epochs": 5,
+    "fine_tune_epochs": 4,
+    "learning_rate": 0.001,
+    "fine_tune_learning_rate": 1e-05,
+    "patience": 3
+  }
+}

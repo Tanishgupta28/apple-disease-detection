@@ -1,6 +1,6 @@
 {
-  "model": "ann",
+  "model": "resnet50",
   "criterion": "minimum validation loss",
   "test_used_for_selection": false,
-  "checkpoint_sha256": "ce726fa0aecdfb25c4f9ed338669d2779bdf07264ef9a46aedeaca9811a453ed"
+  "checkpoint_sha256": "67e7d8ba2d80b696b82df173dcc6f3458da6ea24615a0b6f8407d43647c54cb8"
 }
