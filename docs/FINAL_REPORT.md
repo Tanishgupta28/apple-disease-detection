@@ -54,8 +54,12 @@ Each milestone was tested, committed to main, pushed, and checked against GitHub
 1. `82774d6`: audited four-class ANN/CNN pipeline and measured baselines; 9 tests passed.
 2. `3afa784`: both ResNet phases and evaluation; 10 tests passed cumulatively.
 3. `ee54f9e`: detection/Roboflow workflow; 16 detection tests and actual generic inference.
-4. Final demo/documentation milestone: use `git log -1` for its hash; it includes this
-   report, 34-test evidence and the 56-question interview guide.
+4. `23c0419`: final demo/documentation milestone, including this report, 34-test
+   evidence and the 56-question interview guide.
+
+A following documentation-only cleanup records this fourth hash and normalizes the
+generated recovery manifest's line endings; preserved historical source bytes and
+all measured results are unchanged. `git log -1` identifies that final cleanup.
 
 No force push, credential commit, raw image upload or large model commit was used.
 The supplied folder initially lacked `.git`; it was attached in place to the existing
