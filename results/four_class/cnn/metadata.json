@@ -22,7 +22,7 @@
     ]
   },
   "feature_names": null,
-  "manifest_sha256": "4d24735148e4e646973a74d9fce3c6b3cc077ee65ede799c13c9b10bd9029c74",
+  "manifest_sha256": "66fd4c693a32e08a3e4c5a678173dfc44a4f41ca7521c46160469a6b6f9af576",
   "checkpoint_sha256": "a2deab56c777a6ad523958bc5bde96eedfb69d2482dad33f94bfb2fd67a893fa",
   "selected_phase": "training",
   "selection_metric": "validation_loss",
@@ -42,5 +42,7 @@
   "seed": 42,
   "gpu_devices": [],
   "status": "trained",
-  "data_scope": "recovered four-class apple fruit dataset"
+  "data_scope": "recovered four-class apple fruit dataset",
+  "original_windows_manifest_file_sha256": "4d24735148e4e646973a74d9fce3c6b3cc077ee65ede799c13c9b10bd9029c74",
+  "manifest_hash_method": "SHA256 of CSV bytes with CRLF normalized to LF; membership unchanged"
 }

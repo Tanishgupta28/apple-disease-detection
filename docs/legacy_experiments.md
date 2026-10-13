@@ -1,5 +1,12 @@
 # Historical NIT internship experiments
 
+> October 2026 update: the text below records the earlier Drive-only audit. The new
+> local workspace contains matching four-class data, now inspected and audited in
+> [DATASET.md](DATASET.md). Its photographs include fruit; 502 files contain 472
+> unique images. Additional local YOLO and import-only texture notebooks are preserved
+> under `original_work/recovered_local/`. These discoveries do not change the stored
+> notebook results below or establish the resume's 3,000-leaf classification claim.
+
 These notebooks are historical work, not the upgraded six-class leaf benchmark. No old notebook was rerun. Evidence below is recovered from source cells and stored outputs; cell numbers are zero-based.
 
 ## Recovery and dataset

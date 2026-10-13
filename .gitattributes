@@ -1,0 +1,8 @@
+*.py text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.yaml text eol=lf
+*.ipynb -text
+original_work/recovered_local/*.csv -text whitespace=cr-at-eol

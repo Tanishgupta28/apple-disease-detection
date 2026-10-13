@@ -46,4 +46,3 @@ Model: "custom_cnn"
  Total params: 24,180 (94.45 KB)
  Trainable params: 23,956 (93.58 KB)
  Non-trainable params: 224 (896.00 B)
-

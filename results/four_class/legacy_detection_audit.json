@@ -1,0 +1,33 @@
+{
+  "status": "rejected",
+  "reason": "exact duplicate decoded image found during validation",
+  "first_rejected_image": "00b5b00f6d794132d3.jpg",
+  "byte_hash": "4ad30b4ac563733bc81ee1aa1d5b6b255a169b522624651ab8b1575124020565",
+  "same_byte_hash_files": [
+    "00b5b00f6d794132d3.jpg",
+    "b5b00f6d794132d3.jpg"
+  ],
+  "membership": {
+    "train": [],
+    "val": [
+      "b5b00f6d794132d3.jpg"
+    ],
+    "test": [
+      "00b5b00f6d794132d3.jpg"
+    ]
+  },
+  "split_path_counts": {
+    "train": 4766,
+    "val": 2036,
+    "test": 2036
+  },
+  "complete_dataset_validation": false,
+  "annotation_source_license": "unverified",
+  "custom_disease_training": "not run",
+  "class_order": [
+    "Healthy",
+    "Black rot",
+    "Scab",
+    "Rust"
+  ]
+}

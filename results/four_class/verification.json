@@ -1,0 +1,29 @@
+{
+  "manifest_sha256": "66fd4c693a32e08a3e4c5a678173dfc44a4f41ca7521c46160469a6b6f9af576",
+  "split_counts": {
+    "train": 270,
+    "test": 119,
+    "validation": 70
+  },
+  "models": {
+    "ann": {
+      "checkpoint_hash_verified": true,
+      "saved_metrics_recomputed": true,
+      "saved_prediction_reproduced": true,
+      "max_probability_difference": 4.011077858745438e-09
+    },
+    "cnn": {
+      "checkpoint_hash_verified": true,
+      "saved_metrics_recomputed": true,
+      "saved_prediction_reproduced": true,
+      "max_probability_difference": 1.2397003146258356e-08
+    },
+    "resnet50": {
+      "checkpoint_hash_verified": true,
+      "saved_metrics_recomputed": true,
+      "saved_prediction_reproduced": true,
+      "max_probability_difference": 1.1444915770653097e-07
+    }
+  },
+  "custom_disease_detector_available": false
+}

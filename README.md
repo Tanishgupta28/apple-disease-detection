@@ -1,182 +1,244 @@
-> **October 2026 four-class rebuild in progress:** see [current implementation and verified data audit](docs/FOUR_CLASS_STATUS.md). The six-class results below belong to a separate prior project and are not results for the new TensorFlow fruit classifier.
+﻿# Apple Disease Detector
 
-# Apple Disease Detection from Apple Leaf Images
+A tested TensorFlow/Keras study of **four-class apple fruit classification**, with
+GLCM + ANN, a custom CNN, ResNet50 transfer learning, K-means inspection, and a
+separate YOLO/Roboflow detection workflow. Rebuilt in October 2026 from an existing
+internship repository. [Interview preparation: 56 questions](docs/INTERVIEW_PREPARATION.md).
 
-A reproducible, interview-focused rebuild of an **NIT internship project**: classify an apple leaf into five diseases plus Healthy, compare three understandable CNN architectures, and inspect predictions using Grad-CAM.
+**Evidence first:** the recovered classification dataset contains 502 files and
+472 unique images, including fruit photographs. After exclusions, 459 images are
+used. It does **not** substantiate “3,000+ labelled leaf images” for these classifiers.
+Dataset publisher/license and expert label validation remain unverified. The raw
+images are local and are not redistributed. See [the full audit](docs/DATASET.md).
 
-**Selected model: resnet50_finetuned.** Held-out test accuracy **97.07%**, macro F1 **0.9627**, on **2,013 images**. Selection used validation macro F1 before test evaluation. These are measured results from one seeded run, not a claim of state of the art or field readiness.
+## Run the working demo
 
-## Internship work and motivation
+On the current Windows workspace, the three evaluated checkpoints already exist:
 
-Nine original notebooks were recovered from the supplied Google Drive folder and preserved without modification in `original_work/Apple disease detection codes/`. Stored outputs confirm a historical four-class split of 307 training, 75 validation and 120 test images. The audit distinguishes genuine test results from validation maxima and documents preprocessing, augmentation and reporting limitations. No standalone legacy dataset or model checkpoint was present in that folder.
+```powershell
+cd C:\Users\skg21\Documents\projects\Apple_disease_detection
+.\venv\Scripts\python.exe -m streamlit run app.py
+```
 
-See [the historical comparison](docs/legacy_experiments.md) and [recovery checksums](docs/original_manifest.json). The upgrade improves methodology, data provenance, evaluation and deployable inference. Old and new accuracies are not directly comparable because both the classes and dataset changed.
+Open http://localhost:8501. Upload an apple fruit image, choose an available model,
+inspect all four probabilities, then open K-means or texture features. Confidence
+below 60% triggers a warning; that threshold is not calibrated. Unknown objects and
+leaf images can receive confident incorrect predictions. The app disables custom
+disease detection until a suitable trained detector is registered.
 
-## Dataset and classes
+For a fresh environment (Python 3.12 was tested):
 
-Dataset: **[official AppleLeaf9](https://github.com/JasonYangCode/AppleLeaf9)**. License: **CC BY 4.0**. Citation: Yang, Qing; Duan, Shukai; Wang, Lidan (2022), *Efficient Identification of Apple Leaf Diseases in the Wild Using Convolutional Neural Networks*, Agronomy 12(11), 2784. [Paper](https://doi.org/10.3390/agronomy12112784).
+```powershell
+python -m venv venv
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+.\venv\Scripts\python.exe -m pytest
+.\venv\Scripts\python.exe -m streamlit run app.py
+```
 
-The source contains **14,582 images**. This project selected **13,461** images from the requested six classes, quarantined **56** images in near-duplicate groups with conflicting labels, and used **13,405** images. Brown spot, Grey spot and Mosaic are excluded to keep the five-disease-plus-healthy scope. No fallback dataset was needed. Full provenance and audit details are in [data/README.md](data/README.md) and [dataset_audit.json](results/dataset_audit.json).
+A fresh clone contains code and measured reports, but no new model binaries or raw
+dataset. The app handles missing checkpoints and still provides clustering/texture
+inspection. Train the models using lawfully obtained data or copy your existing
+`artifacts/ann`, `artifacts/cnn`, `artifacts/resnet50` directories, including metadata.
+The older six-class release checkpoint is incompatible with this app.
 
-| Class / checkpoint index order | Used images | Train | Validation | Test |
-|---|---:|---:|---:|---:|
-| Apple Scab | 5,382 | 3,766 | 808 | 808 |
-| Rust | 2,725 | 1,907 | 409 | 409 |
-| Frogeye Leaf Spot | 3,181 | 2,226 | 478 | 477 |
-| Powdery Mildew | 1,184 | 828 | 178 | 178 |
-| Alternaria Leaf Spot | 417 | 291 | 63 | 63 |
-| Healthy | 516 | 360 | 78 | 78 |
-| **Total** | **13,405** | **9,378** | **2,014** | **2,013** |
+## Verified dataset
 
-Class indices are the row order above, starting at zero. Health → Healthy and Scab → Apple Scab are display-name mappings, not new labels. Source images and processed symlinks are excluded from Git.
+Source: recovered local `apple_disease_classification/Train` and `Test`, matching
+class names and counts referenced in the historical notebooks' Kaggle paths.
+Matching filenames/counts do not prove byte-for-byte identity to the internship archive.
+No replacement dataset or disease-label substitution was used.
 
-### Audit, split and preprocessing
-
-- All selected images decoded successfully. Exact byte hashes and decoded-pixel hashes found no identical files/pixels; perceptual checks found related scenes and contradictory labels.
-- Rotation/reflection-aware perceptual-hash groups remain within one split. Seed **42** assigns groups per class to approximately **70/15/15**. Exact membership is saved in [split_manifest.csv](results/split_manifest.csv).
-- Split source images **before** training augmentation. EXIF orientation → RGB → resize 224×224 → tensor → ImageNet RGB mean/std normalization, reused for validation, test and upload inference.
-- Training only: horizontal flip, ±12° rotation, small translation/zoom and mild brightness/contrast jitter.
-- Training class weights are derived only from training frequencies; validation/test reporting is unweighted. We select by macro F1 because minority diseases matter.
-- Disk-backed DataLoader with batching, pinned memory and 8 workers; no full-dataset RAM cache.
-
-![Class distribution](results/figures/class_distribution.png)
-
-## Models and transfer learning
-
-**Custom CNN:** four convolutional blocks (32/64/128/192 channels), batch normalization, ReLU, max pooling and dropout. Global average pooling keeps the six-class head small: **316,198 parameters**. Logits enter CrossEntropyLoss; softmax is used for inference.
-
-**MobileNetV2:** official torchvision ImageNet V1 weights, depthwise separable filtering and inverted residual blocks. It provides a lightweight deployment comparison.
-
-**ResNet50:** official torchvision ImageNet V2 weights and residual/skip connections. It provides a well-known larger comparison.
-
-Transfer learning has two phases: freeze the backbone and train the new head, then unfreeze later MobileNet blocks or ResNet layer4 using a much smaller learning rate. Pretrained batch-normalization statistics stay fixed. Adam uses 0.001 for baseline/head training and 0.00003 for fine-tuning. Early stopping and best-checkpoint saving monitor validation macro F1; ReduceLROnPlateau monitors validation loss. Maximum epoch budgets are 15 baseline, 8 frozen and 12 fine-tuning.
-
-All five experiments trained with **PyTorch CUDA on an H100 40 GB MIG allocation**, using FP32 and batch size 64. The tested environment and exact installed versions are recorded in [environment.json](docs/environment.json) and [package_versions.json](docs/package_versions.json).
-
-## Measured comparison
-
-Training accuracy below is the full augmented training epoch associated with each saved validation checkpoint. It includes dropout and differs from deterministic post-training evaluation.
-
-| Experiment | Train accuracy at selected epoch | Validation accuracy | Validation macro F1 | Parameters | Checkpoint MB |
+| Class (output index) | Raw files | Included | Train | Validation | Test |
 |---|---:|---:|---:|---:|---:|
-| custom_cnn | 62.67% | 72.00% | 0.6592 | 316,198 | 1.28 |
-| mobilenetv2_frozen | 78.52% | 78.20% | 0.7387 | 2,231,558 | 9.17 |
-| mobilenetv2_finetuned | 96.02% | 94.34% | 0.9252 | 2,231,558 | 9.18 |
-| resnet50_frozen | 81.97% | 81.53% | 0.8021 | 23,520,326 | 94.40 |
-| resnet50_finetuned | 98.68% | 96.52% | 0.9593 | 23,520,326 | 94.40 |
+| Blotch (0) | 146 | 131 | 80 | 21 | 30 |
+| Rot (1) | 152 | 139 | 81 | 21 | 37 |
+| Scab (2) | 113 | 107 | 63 | 16 | 28 |
+| Normal (3) | 91 | 82 | 46 | 12 | 24 |
+| **Total** | **502** | **459** | **270** | **70** | **119** |
 
-Source: [model_comparison.csv](results/model_comparison.csv), saved phase histories and summaries. Best validation macro F1 selected **resnet50_finetuned**; the tie breaker is lower validation loss. The checkpoint's SHA-256 was saved before test evaluation. Only the selected final model was tested; other candidates have no claimed test results.
+All 502 files decoded. Byte/pixel SHA-256 found 472 unique images. Excluded: 30 exact
+copies, 11 training images related to original test images, and 2 images in a
+conflicting-label group. Perceptual hashes across eight rotations/reflections found
+96 exact/near candidate pairs; connected groups stay together. A manual sample review
+confirmed recompressed/resized copies. Undetected source relationships remain possible.
 
-### Selected model evaluation
+The original test set is retained after audit; related Train files are excluded.
+Remaining Train groups are allocated per class to approximately 80/20 train/validation
+with seed 42. Image content hashes are checked before training. Augmentation is
+training-only; it does not increase unique-image counts. All models use the same
+[manifest](results/four_class/manifest.csv). The historically used test data is held
+out from these new fits, but is not a prospective independent orchard test.
 
-These are deterministic, unaugmented metrics. Train metrics describe fit, validation metrics support selection, and test metrics estimate held-out performance.
+![Audited class distribution](results/four_class/class_distribution.png)
 
-| Split | Images | Accuracy | Macro precision | Macro recall | Macro F1 | Weighted F1 |
-|---|---:|---:|---:|---:|---:|---:|
-| Train | 9,378 | 99.29% | 0.9880 | 0.9964 | 0.9921 | 0.9929 |
-| Validation | 2,014 | 96.52% | 0.9502 | 0.9689 | 0.9593 | 0.9653 |
-| Test | 2,013 | 97.07% | 0.9617 | 0.9641 | 0.9627 | 0.9707 |
+## Measured classification results
 
-[Complete metrics and per-class scores](results/metrics.json) · [Test predictions](results/test_predictions.csv)
+These are **new CPU experiments** on the same 119 held-out images, using the fixed
+configuration in [four_class.json](configs/four_class.json). Checkpoints and the
+selected architecture use validation loss, never test scores. No model settings were
+tuned after inspecting these test results.
 
-![Test confusion matrix](results/figures/confusion_matrix.png)
+| Model | Test accuracy | Macro precision | Macro recall | Macro F1 | Weighted F1 |
+|---|---:|---:|---:|---:|---:|
+| ANN on GLCM | 48.74% | 0.4557 | 0.4530 | 0.4439 | 0.4795 |
+| Custom CNN | 46.22% | 0.2390 | 0.4173 | 0.2969 | 0.3358 |
+| ResNet50, selected frozen head | **66.39%** | **0.6769** | **0.6461** | **0.6546** | **0.6703** |
 
-![Classwise test F1](results/figures/classwise_f1.png)
+ANN trained 60 epochs. CNN stopped after 9, selecting epoch 3. ResNet50 trained 5
+frozen-head epochs and 4 fine-tuning epochs. Fine-tuning worsened validation loss
+(best ~0.7293 versus frozen ~0.6825), so **the frozen-head checkpoint remains selected**.
+ResNet validation accuracy is 81.43%; the lower test result illustrates uncertainty
+and distribution differences in this small dataset. The weak CNN is reported as measured.
 
-The most frequent confused pair is **Apple Scab ↔ Frogeye Leaf Spot**, with **18** bidirectional test errors. See [error analysis](docs/error_analysis.md) for image-based observations, confidently wrong predictions and uncertainty examples. No model changes were made based on these test errors.
+[Comparison CSV](results/four_class/model_comparison.csv) ·
+[ANN per-class metrics](results/four_class/ann/metrics.json) ·
+[CNN per-class metrics](results/four_class/cnn/metrics.json) ·
+[ResNet per-class metrics](results/four_class/resnet50/metrics.json) ·
+[Full experiment explanation](docs/EXPERIMENTS.md).
 
-Checkpoint size: **94.40 MB**. Warm batch-one forward median: **2.83 ms**; preprocess-plus-forward median: **6.53 ms**, measured on the recorded GPU. File decoding, model loading, uploads and Grad-CAM are excluded; these are not phone or end-to-end application latency measurements.
+Each run saves predictions, probabilities, histories, learning curves, architecture,
+configuration, preprocessing metadata and evaluated checkpoint SHA-256. Manifest
+fingerprints normalize line endings for Windows/Linux consistency; original Windows
+file hashes are also retained. Detection metrics are never mixed into this table.
 
-## Grad-CAM and demo
+![Selected ResNet confusion matrix](results/four_class/resnet50/confusion_matrix.png)
 
-Grad-CAM weights final convolutional feature maps using gradients of the predicted class logit. It visualizes regions associated with the prediction for inspection of lesions and background shortcuts. It is a coarse explanation, not a lesion segmentation or proof of biological correctness.
+## Methods and design
 
-![Representative Grad-CAM examples](results/figures/gradcam_examples.png)
+**K-means:** convert uint8 RGB to floating-point Lab color. Fit seeded K-means with
+10 initializations on up to 10,000 pixels and assign every pixel to a color cluster.
+Examples compare K=2,3,4. Clusters can mix background, shadows and lesions; there is
+no automatic biological lesion identification or claimed segmentation accuracy.
+Generate the real local input/reconstruction/cluster example with
+`python -m apple_disease.examples`; see `results/local_examples/kmeans_example.png`.
+The raw-photo montage stays local because image rights are unverified.
 
-`app.py` accepts an uploaded leaf photograph and shows the image, predicted disease, confidence, all ranked class probabilities and an optional Grad-CAM overlay. Confidence below 0.6 displays: “Prediction confidence is low. Try a clearer image of a single apple leaf.” The demo provides no pesticide recommendations.
+**GLCM:** grayscale luminance quantized to 32 levels; distances 1,2,4 pixels and
+angles 0°,45°,90°,135°; symmetric normalized co-occurrence matrices. Contrast,
+homogeneity, energy, correlation and dissimilarity each contribute mean/std across
+12 matrices, giving 10 numerical features. Constant and invalid inputs are tested.
+The ANN uses whole-image texture; K-means is a separate inspection experiment.
 
-## Project architecture
+![Explicitly synthetic texture illustration, not disease training data](results/four_class/toy_texture_examples.png)
 
-```text
-.
-├── original_work/       # Nine unchanged internship notebooks
-├── notebooks/           # Four lightweight teaching notebooks
-├── src/                 # Data, models, training, evaluation, inference, Grad-CAM
-├── configs/config.yaml  # Class order, seed, preprocessing and training settings
-├── scripts/             # Download, prepare, audit and documentation helpers
-├── data/                # Attribution; ignored raw images and processed split
-├── models/              # Selected model metadata; ignored binary checkpoints
-├── results/             # Measured JSON/CSV, split membership and figures
-├── docs/                # Historical audit, methodology and interview notes
-├── tests/               # Dataset-independent contract/smoke tests
-└── app.py               # Streamlit demo
-```
+**ANN:** 10 -> training-only Normalization -> Dense(32, ReLU, L2) -> Dropout(0.25)
+-> Dense(16, ReLU) -> Softmax(4). 969 parameters including normalization state.
+Scaler values and feature order are saved with the model.
 
-No redundant legacy notebook copies are created. The notebooks call/read reusable modules and measured artifacts; expensive training cells are disabled by default.
+**CNN:** RGB 96x96 -> training augmentation -> /255 -> three Conv3x3/BatchNorm/ReLU/
+MaxPool blocks with 16,32,64 channels -> global average pool -> Dropout(0.3) ->
+Softmax(4). Spatial shapes are 48x48x16, 24x24x32, 12x12x64; 24,180 parameters.
 
-## Installation and quick demo
+**ResNet50:** official Keras ImageNet backbone without its classifier. RGB becomes
+BGR and ImageNet means are subtracted, matching official preprocessing. At 96x96,
+the backbone emits 3x3x2048; global pooling and dropout feed a four-class head.
+First freeze the backbone and train the head; then reload the best head and unfreeze
+only final-block convolutions at a lower learning rate. All BN stays frozen and
+uses stored statistics. Tests verify those exact behaviors and saved-model parity.
 
-Python 3.10 was tested. Keep an existing working CUDA-enabled torch/torchvision pair in a GPU notebook. A fresh environment needs a compatible PyTorch/torchvision installation; see [official installation instructions](https://pytorch.org/get-started/locally/). No system CUDA upgrade is part of this project.
+**Training:** seed 42, batch 16, Adam, sparse cross-entropy, train-only class weights,
+EarlyStopping and ModelCheckpoint on validation loss. Image models augment only
+training inputs. The environment has Python 3.12.6, TensorFlow 2.20.0 and Intel Iris
+Xe graphics; TensorFlow sees no GPU and `nvidia-smi` is unavailable. Existing cached
+ImageNet weights were reused. No drivers or unrelated processes were changed.
+[Environment record](docs/environment_four_class.json).
 
-```bash
-git clone https://github.com/Tanishgupta28/apple-disease-detection.git
-cd apple-disease-detection
-python -m pip install -r requirements.txt
-python scripts/download_model.py
-streamlit run app.py
-```
+## YOLO and Roboflow
 
-The selected checkpoint is a checksummed [GitHub release asset](https://github.com/Tanishgupta28/apple-disease-detection/releases/tag/v1.0.0), rather than a large Git blob. `download_model.py` verifies it against `models/selected_model.json`. Public release downloading needs no GitHub login. In the current project directory, the checkpoint is already present, so launch directly with `streamlit run app.py`.
+The separate [detection workflow](docs/YOLO_ROBOFLOW.md) validates real bounding-box
+exports, trains Ultralytics YOLO, evaluates the best checkpoint using precision,
+recall, mAP@0.5 and mAP@0.5:0.95, and renders boxes/class names. Format validation
+cannot establish annotation quality. Local Roboflow ZIP import is tested; remote
+version download uses an environment API key and was not run without credentials.
 
-## Reproduce preparation, training and evaluation
+A real generic YOLO11n inference demo completed. It incorrectly labelled the chosen
+apple “cake” at 0.6384 confidence. [Saved evidence](results/four_class/yolo_pretrained_example.json)
+is deliberately described as an inference demonstration, with no disease metrics.
+Custom disease detection training/evaluation remains incomplete. Older local YOLOv5
+files contain leaf boxes and different classes; their historical one-epoch validation
+log is documented separately and is not presented as a new test benchmark.
+The recovered detection split failed validation: the same image occurs in validation
+and test under different filenames. [Failure evidence](results/four_class/legacy_detection_audit.json)
+records the matching hashes; those unchecked splits are not used for a new detector.
 
-Run commands from the project root:
+## Reproduce the classification experiments
 
-```bash
-python scripts/download_dataset.py
-python scripts/prepare_data.py
-CUBLAS_WORKSPACE_CONFIG=:4096:8 python -m src.train --run-dir runs/reproduction
-python -m src.evaluate --run-dir runs/reproduction
-python -m src.predict /path/to/apple_leaf.jpg
+Place the lawful original data in `apple_disease_classification/{Train,Test}/`
+with the four `*_Apple` folders. The committed manifest refers to those relative paths.
+For exactly matching recovered data, use it directly:
+
+```powershell
+python -m apple_disease.train --model ann --output artifacts/ann
+python -m apple_disease.train --model cnn --output artifacts/cnn
+python -m apple_disease.train --model resnet50 --output artifacts/resnet50
+python -m apple_disease.report
+python -m apple_disease.examples
 python -m pytest
 ```
 
-Preparation refuses to overwrite an existing split. Training defaults to all three architectures and five experiments, requires a visible CUDA device, and refuses to overwrite a benchmark with published test metrics. Evaluation reuses existing frozen metrics. For a deliberately new benchmark, preserve these artifacts and explicitly establish a new experiment workspace/configuration; do not mix a new model/split with this report. The commands above are the fresh benchmark sequence, not a reason to rerun the completed results in place.
+Existing run directories are protected against overwriting. On this workspace these
+runs are already complete: no retraining is needed for the demo. To study a genuinely
+new dataset, prepare a new manifest and use new run paths, explicitly documenting
+that those results are a different experiment:
 
-The `--run-dir` option stores new checkpoints/results under `runs/reproduction/` inside this project root, preserving the published benchmark. Run preparation only when the processed manifest is absent; the committed split manifest records the benchmark to reproduce. A repeated run follows the fixed protocol; it does not justify choosing a new model from the published test scores.
-
-Individual model training in an untested run:
-
-```bash
-python -m src.train --model custom_cnn --run-dir runs/new_run
-python -m src.train --model mobilenetv2 --run-dir runs/new_run
-python -m src.train --model resnet50 --run-dir runs/new_run
+```powershell
+python -m apple_disease.data --root path/to/data --output results/new_audit
+python -m apple_disease.train --model ann --root path/to/data --manifest results/new_audit/manifest.csv --output artifacts/new_ann
 ```
 
-Inference reconstructs the selected architecture, loads its weights and reads class order/image size from checkpoint metadata. No ImageNet download is needed at inference. Dataset-independent tests use no training images and no pretrained downloads.
+ResNet50 uses official ImageNet weights; construction requires cached weights or
+network access. Unit tests use random weights solely to test contracts and do not
+claim those tests as transfer-learning results.
 
-## Limitations and future work
+## Repository map
 
-- One seed and bounded epoch budgets; no multi-seed intervals or broad hyperparameter search.
-- No independent orchard/season test. Perceptual grouping reduces known duplicate leakage but cannot establish all related leaves or source augmentation identities.
-- Single-label six-class scope excludes other diseases and mixed diagnoses. Unknown/non-leaf uploads can receive high confidence.
-- Resizing may distort shape or obscure small lesions; source labels may be imperfect.
-- Softmax probabilities are uncalibrated; Grad-CAM is approximate.
-- GPU timing is not mobile deployment timing. External validation is required before practical field claims.
+```text
+apple_disease/                 Active four-class implementation
+  data.py                     Auditing, duplicate groups, manifests, splits
+  preprocessing.py            Shared RGB decoder and input validation
+  segmentation.py             Lab K-means
+  features.py                 Quantized GLCM features
+  models.py / resnet.py        ANN, CNN, ResNet50
+  train.py / evaluation.py     Training, checkpointing, held-out metrics
+  inference.py                Checkpoint integrity and shared app inference
+  detection.py                Separate YOLO validation/training/inference
+  roboflow_import.py           Local export import and optional API download
+  examples.py / report.py      Genuine examples and compact result exports
+app.py                        Streamlit demo
+configs/four_class.json        Explicit class order and hyperparameters
+results/four_class/            Audits, manifests and measured new experiments
+artifacts/                    Local ignored evaluated checkpoints
+results/local_examples/       Local ignored source-photo visualizations
+original_work/                Preserved original notebooks
+src/, scripts/, configs/config.yaml, results/* outside four_class/
+                              Preserved prior six-class PyTorch project
+```
 
-Priorities: expert-reviewed labels/group metadata, independent orchard testing, validation-based calibration, unknown-image rejection, class-weight ablation, multi-seed runs and actual target-device measurements. The focus remains correct methodology and understandable models.
+Default `pytest` runs the active four-class suite. Older tests directly under
+`tests/` belong to the prior PyTorch implementation and are not included in its
+claim. Its original dependencies are preserved in `requirements-legacy-six-class.txt`.
+The original six-class README is accessible in [the preserved Git history](https://github.com/Tanishgupta28/apple-disease-detection/blob/d7767f5/README.md).
 
-## Interview preparation
+## Limitations and next steps
 
-Start with [interview_notes.md](docs/interview_notes.md) for simple explanations, spoken interview answers and 40 project questions. Then read [methodology.md](docs/methodology.md), `src/models.py`, `src/train.py`, the results table, and the legacy audit. Be able to explain why validation and test are separate and why an architecture name does not guarantee better results.
+- The recovered fruit data does not establish the resume's 3,000+ leaf-image claim.
+- Source/license, independent label review and source-group metadata are incomplete.
+- The small historically exposed test set is not independent field validation.
+- Related images remain within splits, and perceptual grouping can miss or overgroup copies.
+- Softmax is uncalibrated; there is no reliable unknown-image rejection.
+- K-means has no lesion masks; YOLO has no newly verified custom disease benchmark.
+- One seed and a bounded CPU training budget; no multi-seed study or calibrated intervals.
 
-## References and licenses
+Priorities are expert-reviewed, clearly licensed task-matched data, source-group
+splits and independent orchard testing, then calibration and targeted model ablations.
 
-- [AppleLeaf9 official source and CC BY 4.0 license](https://github.com/JasonYangCode/AppleLeaf9)
-- [Yang, Duan & Wang, Agronomy 2022](https://doi.org/10.3390/agronomy12112784)
-- [MobileNetV2 paper](https://arxiv.org/abs/1801.04381)
-- [ResNet paper](https://arxiv.org/abs/1512.03385)
-- [Grad-CAM paper](https://arxiv.org/abs/1610.02391)
-- [Torchvision model documentation](https://pytorch.org/vision/stable/models.html)
+Start interview revision with [INTERVIEW_PREPARATION.md](docs/INTERVIEW_PREPARATION.md),
+[DATASET.md](docs/DATASET.md), and [EXPERIMENTS.md](docs/EXPERIMENTS.md). Keep new
+implementation, completed experiments and historical personal experience distinct.
 
-Project code is MIT licensed. Dataset/sample-image rights remain with their original authors under the dataset license. This repository's sample/error/Grad-CAM figures are derived from AppleLeaf9 with attribution above.
+Code: MIT. Dataset, pretrained weights and optional dependencies retain their own
+licenses. Technical references: [Keras ResNet](https://keras.io/api/applications/resnet/),
+[TensorFlow transfer learning](https://www.tensorflow.org/guide/keras/transfer_learning),
+[scikit-image GLCM](https://scikit-image.org/docs/stable/auto_examples/features_detection/plot_glcm.html),
+[Ultralytics detection](https://docs.ultralytics.com/datasets/detect/),
+[Roboflow export](https://docs.roboflow.com/datasets/create-and-upload/download-a-dataset).

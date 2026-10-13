@@ -24,4 +24,3 @@ Model: "resnet50_classifier"
  Total params: 23,595,908 (90.01 MB)
  Trainable params: 8,196 (32.02 KB)
  Non-trainable params: 23,587,712 (89.98 MB)
-

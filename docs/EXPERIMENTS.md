@@ -17,14 +17,17 @@ not a test-driven architecture search. Best model is selected by validation loss
 
 | Model | Test accuracy | Macro precision | Macro recall | Macro F1 | Weighted F1 |
 |---|---:|---:|---:|---:|---:|
-| ANN (GLCM) | 0.487395 | See CSV | See CSV | 0.443899 | See CSV |
-| Custom CNN | 0.462185 | See CSV | See CSV | 0.296919 | See CSV |
-| ResNet50 selected frozen head | 0.663866 | See CSV | See CSV | 0.654552 | See CSV |
+| ANN (GLCM) | 0.487395 | 0.455742 | 0.452968 | 0.443899 | 0.479487 |
+| Custom CNN | 0.462185 | 0.238992 | 0.417342 | 0.296919 | 0.335828 |
+| ResNet50 selected frozen head | 0.663866 | 0.676942 | 0.646067 | 0.654552 | 0.670329 |
 
 Exact metrics, prediction probabilities, per-class reports and confusion matrices:
 `results/four_class/model_comparison.csv` and each model's `metrics.json`.
 All three use identical `manifest_sha256` values. Checkpoint hashes bind results to
 saved models; compact reports are committed and `.keras` files stay in local `artifacts/`.
+Manifest hashes normalize CRLF to LF so Git's Windows/Linux line-ending conversion
+does not change the experiment identity. The raw Windows manifest file hash from
+training is retained separately in metadata; membership and all metrics are unchanged.
 
 ## What actually trained
 
@@ -34,6 +37,8 @@ saved models; compact reports are committed and `.keras` files stay in local `ar
   high-accuracy classifier. BatchNorm's small-data running statistics, overfitting,
   augmentation, and source artifacts are plausible contributors; no ablation establishes
   a single cause. Macro F1 exposes the uneven performance hidden by overall accuracy.
+  The selected CNN predicts only Blotch and Rot on this test set: Scab and Normal
+  both have zero recall. Keep this failure visible when demonstrating the model.
 - ResNet50: 5 frozen-head epochs, then 4 fine-tuning epochs from the best frozen checkpoint.
   Fine-tuning did **not** improve validation loss (best head ~0.6825 versus fine-tune
   ~0.7293). Therefore the frozen-head checkpoint remains selected. Do not call the

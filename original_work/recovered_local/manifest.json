@@ -1,0 +1,26 @@
+[
+  {
+    "source_relative_path": "research papaer seen till now/paper2/Untitled.ipynb",
+    "preserved_as": "original_work/recovered_local/leaf_sampling.ipynb",
+    "bytes": 7623,
+    "sha256": "d92b30a8d08adddb8bcecb5d19573d534eba1f46653408da1ce0e7b03de8ef1b"
+  },
+  {
+    "source_relative_path": "research papaer seen till now/paper2/Untitled1.ipynb",
+    "preserved_as": "original_work/recovered_local/texture_imports_only.ipynb",
+    "bytes": 1257,
+    "sha256": "4197ffa879d1fed34cb514e58c7dc7d8113c66a0081db7080495ef2a6ea27183"
+  },
+  {
+    "source_relative_path": "research papaer seen till now/yolo experiment/train/training.ipynb",
+    "preserved_as": "original_work/recovered_local/yolov5_training_attempt.ipynb",
+    "bytes": 15439,
+    "sha256": "5ce2d456b5d76ff3e9f64c1fc210cff542949cadd6566070958631108cc35f5e"
+  },
+  {
+    "source_relative_path": "research papaer seen till now/yolo experiment/train/yolov5/runs/train/apple_disease_yolov56/results.csv",
+    "preserved_as": "original_work/recovered_local/yolov5_epoch0.csv",
+    "bytes": 590,
+    "sha256": "7012be49e91564458ecbd6167559d62d0cd6125bb425a00fc50205843bf626d4"
+  }
+]

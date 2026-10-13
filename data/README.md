@@ -1,3 +1,5 @@
+> Preserved prior six-class project documentation. The active four-class rebuild is described in the root README and docs/DATASET.md; its checkpoints are in local artifacts/.
+
 # AppleLeaf9 dataset
 
 Official source: https://github.com/JasonYangCode/AppleLeaf9

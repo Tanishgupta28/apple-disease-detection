@@ -10,7 +10,7 @@
     "training_seconds": 15.428894500015303,
     "parameters": 969,
     "selected_phase": "training",
-    "manifest_sha256": "4d24735148e4e646973a74d9fce3c6b3cc077ee65ede799c13c9b10bd9029c74",
+    "manifest_sha256": "66fd4c693a32e08a3e4c5a678173dfc44a4f41ca7521c46160469a6b6f9af576",
     "checkpoint_sha256": "ce726fa0aecdfb25c4f9ed338669d2779bdf07264ef9a46aedeaca9811a453ed",
     "validation_loss": 1.125488519668579,
     "validation_accuracy": 0.5428571701049805
@@ -26,7 +26,7 @@
     "training_seconds": 22.814549900009297,
     "parameters": 24180,
     "selected_phase": "training",
-    "manifest_sha256": "4d24735148e4e646973a74d9fce3c6b3cc077ee65ede799c13c9b10bd9029c74",
+    "manifest_sha256": "66fd4c693a32e08a3e4c5a678173dfc44a4f41ca7521c46160469a6b6f9af576",
     "checkpoint_sha256": "a2deab56c777a6ad523958bc5bde96eedfb69d2482dad33f94bfb2fd67a893fa",
     "validation_loss": 1.3466933965682983,
     "validation_accuracy": 0.5
@@ -42,7 +42,7 @@
     "training_seconds": 110.25293260009494,
     "parameters": 23595908,
     "selected_phase": "head",
-    "manifest_sha256": "4d24735148e4e646973a74d9fce3c6b3cc077ee65ede799c13c9b10bd9029c74",
+    "manifest_sha256": "66fd4c693a32e08a3e4c5a678173dfc44a4f41ca7521c46160469a6b6f9af576",
     "checkpoint_sha256": "67e7d8ba2d80b696b82df173dcc6f3458da6ea24615a0b6f8407d43647c54cb8",
     "validation_loss": 0.6825418472290039,
     "validation_accuracy": 0.8142856955528259

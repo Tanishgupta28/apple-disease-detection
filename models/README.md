@@ -1,3 +1,5 @@
+> Preserved prior six-class project documentation. The active four-class rebuild is described in the root README and docs/DATASET.md; its checkpoints are in local artifacts/.
+
 # Model artifacts
 
 Training saves the best validation checkpoint for each of the five experiments as `.pth`. These binary files are ignored by Git. `selected_model.json` records the architecture, six-class ordering, preprocessing, checkpoint filename, SHA-256, measured validation results and hardware for the winner. Results selection is based on validation macro F1, never test accuracy.

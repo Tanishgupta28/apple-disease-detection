@@ -7,6 +7,13 @@ from apple_disease import CLASSES
 from apple_disease.data import prepare, load_manifest, load_arrays, validate_manifest
 
 
+def test_manifest_fingerprint_independent_of_checkout_line_endings(tmp_path):
+    from apple_disease.data import manifest_digest
+    a, b = tmp_path / "lf.csv", tmp_path / "crlf.csv"
+    a.write_bytes(b"path,label\na.png,0\n"); b.write_bytes(b"path,label\r\na.png,0\r\n")
+    assert manifest_digest(a) == manifest_digest(b)
+
+
 def make_dataset(root):
     rng = np.random.default_rng(100)
     for split, n in (("Train", 5), ("Test", 2)):

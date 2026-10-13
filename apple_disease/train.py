@@ -12,7 +12,7 @@ import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 from . import CLASSES
-from .data import load_manifest, load_arrays, sha256
+from .data import load_manifest, load_arrays, sha256, manifest_digest
 from .features import glcm_features, FEATURE_NAMES
 from .models import ann, cnn, compile_model
 from .evaluation import save_evaluation
@@ -107,7 +107,7 @@ def train(model_name, root, manifest, config_path, output):
     validation = model.evaluate(val_ds, verbose=0, return_dict=True)
     metadata = {"model": model_name, "classes": list(CLASSES), "image_size": config["image_size"],
                 "glcm": config["glcm"], "feature_names": list(FEATURE_NAMES) if model_name == "ann" else None,
-                "manifest_sha256": sha256(manifest), "checkpoint_sha256": sha256(output / "best.keras"),
+                "manifest_sha256": manifest_digest(manifest), "checkpoint_sha256": sha256(output / "best.keras"),
                 "selected_phase": selected_phase, "selection_metric": "validation_loss", "validation": validation,
                 "class_weights": weights, "training_seconds": elapsed, "parameters": model.count_params(),
                 "tensorflow_version": tf.__version__, "seed": config["seed"],

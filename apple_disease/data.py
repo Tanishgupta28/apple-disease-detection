@@ -18,6 +18,12 @@ def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def manifest_digest(path):
+    """Stable on Windows/Linux Git checkouts; normalize only line endings."""
+    content = Path(path).read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(content).hexdigest()
+
+
 def perceptual_hashes(array):
     """Eight rotations/reflections; Hamming matches are candidates, not proof."""
     return [int(str(imagehash.phash(Image.fromarray(b))), 16)

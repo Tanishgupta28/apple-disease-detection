@@ -3,13 +3,13 @@ import json
 import shutil
 from pathlib import Path
 import pandas as pd
-from .data import sha256
+from .data import sha256, manifest_digest
 
 
 def main():
     target = Path("results/four_class")
     records = []
-    manifest_hash = sha256(target / "manifest.csv")
+    manifest_hash = manifest_digest(target / "manifest.csv")
     for name in ("ann", "cnn", "resnet50"):
         source = Path("artifacts") / name
         if not (source / "metrics.json").exists():
@@ -22,7 +22,12 @@ def main():
         dest = target / name; dest.mkdir(exist_ok=True)
         for file in source.iterdir():
             if file.is_file() and file.suffix in (".json", ".csv", ".png", ".txt"):
-                shutil.copy2(file, dest / file.name)
+                if file.suffix in (".txt", ".csv"):
+                    # Normalize Windows CSVLogger's CR-CR-LF without changing values.
+                    data = file.read_bytes().replace(b"\r\r\n", b"\n").replace(b"\r\n", b"\n")
+                    (dest / file.name).write_bytes(data.rstrip() + b"\n")
+                else:
+                    shutil.copy2(file, dest / file.name)
         record = {k: metrics[k] for k in ("model", "accuracy", "precision_macro", "recall_macro", "f1_macro", "f1_weighted", "n_images", "training_seconds", "parameters", "selected_phase", "manifest_sha256", "checkpoint_sha256")}
         record["validation_loss"] = metrics["validation"]["loss"]
         record["validation_accuracy"] = metrics["validation"]["accuracy"]

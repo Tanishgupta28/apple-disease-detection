@@ -1,5 +1,11 @@
 # Four-class rebuild status
 
+Completed in October 2026: audited data preparation; K-means/GLCM; trained ANN, CNN,
+and both ResNet50 phases; held-out evaluation; YOLO/Roboflow workflows; Streamlit;
+34 passing tests and the [56-question interview guide](INTERVIEW_PREPARATION.md).
+See the root [README](../README.md) for commands and exact measured results.
+Custom disease detector training and credentialed Roboflow download are incomplete.
+
 New work is implemented under `apple_disease/` with `configs/four_class.json`.
 It uses TensorFlow/Keras and the recovered historical fruit class labels.
 The existing `src/`, `scripts/`, six-class results and older teaching notebooks

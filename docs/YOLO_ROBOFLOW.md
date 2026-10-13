@@ -50,6 +50,17 @@ unique-image counts. Its class order is **Healthy, Black rot, Scab, Rust**, diff
 from the fruit classifier. Three inspected examples show boxes around apple leaves,
 not lesion masks. The code did not manufacture those boxes.
 
+The new full-validator attempt **rejected this dataset** on an exact duplicate across
+validation and test: `val` contains `b5b00f6d794132d3.jpg`, while `test` contains
+`00b5b00f6d794132d3.jpg`. They have the same byte SHA-256
+`4ad30b4ac563733bc81ee1aa1d5b6b255a169b522624651ab8b1575124020565`.
+Different filenames had hidden the overlap. The validator stops at this failure,
+so there is no claim of a complete unique-image audit of the detection corpus.
+See `results/four_class/legacy_detection_audit.json`. This split must be repaired
+with source-group/duplicate review and annotation provenance established before a
+defensible custom disease benchmark. Its historical validation log cannot be treated
+as an independent test result.
+
 A local YOLOv5 `results.csv` contains **one epoch (epoch 0)** of historical validation
 logging: precision 0.24312, recall 0.8086, mAP@0.5 0.34663, mAP@0.5:0.95 0.19932.
 These are unverified historical validation outputs, not new test results and not

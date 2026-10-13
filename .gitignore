@@ -31,3 +31,5 @@ results/local_examples/
 artifacts/
 *.lnk
 desktop.ini
+data/detection/
+models/detection.json
